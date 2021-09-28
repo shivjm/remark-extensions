@@ -1,0 +1,35 @@
+{
+  "name": "micromark-extension-kbd-nested",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint src",
+    "test": "nyc mocha tests/**/*.ts"
+  },
+  "author": "Shiv Jha-Mathur",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "micromark-util-types": "^1.0.1",
+    "mocha": "^9.1.2",
+    "nyc": "^15.1.0",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "micromark-util-character": "^1.1.0",
+    "micromark-util-chunked": "^1.0.0",
+    "micromark-util-symbol": "^1.0.0",
+    "remark": "^14.0.1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "esnext"
+  },
+  "include": ["src/**/*", "src/node_modules/**/*", "tests/**/*"],
+  "exclude": ["node_modules/*"]
+}

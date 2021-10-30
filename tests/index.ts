@@ -1,7 +1,7 @@
 import "mocha";
 import { assert } from "chai";
 
-import { keyboard, html } from "../src/index.js";
+import { html, syntax } from "../src/index.js";
 
 import { micromark } from "micromark";
 
@@ -14,7 +14,7 @@ function runCases(cases: Cases) {
     )}`, () => {
       assert.equal(
         micromark(input, {
-          extensions: [keyboard({ delimiter })],
+          extensions: [syntax({ delimiter })],
           htmlExtensions: [html],
         }),
         expected,

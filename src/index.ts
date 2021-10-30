@@ -31,7 +31,7 @@ export const html = {
 };
 
 // adapted from <https://github.com/micromark/micromark/blob/1b378e72675b15caff021f957a824d1f01420774/packages/micromark-core-commonmark/dev/lib/code-text.js>
-export const keyboard = (options: IOptions = {}) => {
+export const syntax = (options: IOptions = {}) => {
   const { delimiter: rawDelimiter } = options;
   const delimiter =
     typeof rawDelimiter === "string"

@@ -1,4 +1,4 @@
-import type { State, Tokenizer, Resolver } from "micromark-util-types";
+import type { State, Tokenizer } from "micromark-util-types";
 
 import { codes } from "micromark-util-symbol/codes";
 import { types } from "micromark-util-symbol/types";
@@ -72,13 +72,15 @@ export const keyboard = (options: IOptions = {}) => {
       }
 
       if (code === delimiter) {
+        // first try closing, then try parsing nested sequence, then
+        // just treat it as a literal
         return effects.attempt(
           {
             tokenize: makeClosingTokenizer(delimiter, size),
             partial: true,
           },
           ok,
-          (code) => {
+          () => {
             return effects.attempt(
               { tokenize: tokenizeKeyboard, partial: true },
               gap,

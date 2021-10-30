@@ -1,5 +1,4 @@
-import type { State, Tokenizer } from "micromark-util-types";
-
+import type { Event, Extension, State, Tokenizer } from "micromark-util-types";
 import { codes } from "micromark-util-symbol/codes";
 import { types } from "micromark-util-symbol/types";
 import { markdownLineEnding } from "micromark-util-character";
@@ -17,21 +16,23 @@ const KEYBOARD_MARKER_TYPE = "keyboardSequenceMarker";
 
 const SPACE_TYPE = "space";
 
+/* eslint-disable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call */
 export const html = {
   enter: {
-    [KEYBOARD_TYPE]: function () {
+    [KEYBOARD_TYPE]: function (): void {
       this.tag("<kbd>");
     },
   },
   exit: {
-    [KEYBOARD_TYPE]: function () {
+    [KEYBOARD_TYPE]: function (): void {
       this.tag("</kbd>");
     },
   },
 };
+/* eslint-enable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call */
 
 // adapted from <https://github.com/micromark/micromark/blob/1b378e72675b15caff021f957a824d1f01420774/packages/micromark-core-commonmark/dev/lib/code-text.js>
-export const syntax = (options: IOptions = {}) => {
+export const syntax = (options: IOptions = {}): Extension => {
   const { delimiter: rawDelimiter } = options;
   const delimiter =
     typeof rawDelimiter === "string"
@@ -43,7 +44,7 @@ export const syntax = (options: IOptions = {}) => {
 
     return start;
 
-    function start(_code: number): void | State {
+    function start(): void | State {
       effects.enter(KEYBOARD_TYPE);
       effects.enter(KEYBOARD_MARKER_TYPE);
       return opening;
@@ -143,6 +144,7 @@ export const syntax = (options: IOptions = {}) => {
 
   const tokenizer = {
     tokenize: tokenizeKeyboard,
+    resolveAll: (events: Event[]) => events,
   };
 
   return {
@@ -156,7 +158,7 @@ function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
   return function (effects, ok, nok) {
     let current = 0;
 
-    function start(_code: number): void | State {
+    function start(): void | State {
       effects.enter(KEYBOARD_MARKER_TYPE);
       return closing;
     }

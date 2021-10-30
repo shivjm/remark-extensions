@@ -19,10 +19,6 @@ const KEYBOARD_TEXT_ESCAPE = "keyboardSequenceEscape";
 const KEYBOARD_SEQUENCE_MARKER = "keyboardSequenceMarker";
 const SPACE_TYPE = "space";
 
-export function transform(input: string): string {
-  return input;
-}
-
 export const html = {
   enter: {
     [KEYBOARD_TYPE]: function () {

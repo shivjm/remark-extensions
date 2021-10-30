@@ -25,20 +25,16 @@ export function transform(input: string): string {
 
 export const html = {
   enter: {
-    [KEYBOARD_TYPE]: enterKbdData,
+    [KEYBOARD_TYPE]: function () {
+      this.tag("<kbd>");
+    },
   },
   exit: {
-    [KEYBOARD_TYPE]: exitKbdData,
+    [KEYBOARD_TYPE]: function () {
+      this.tag("</kbd>");
+    },
   },
 };
-
-function enterKbdData() {
-  this.tag("<kbd>");
-}
-
-function exitKbdData() {
-  this.tag("</kbd>");
-}
 
 // adapted from <https://github.com/micromark/micromark/blob/1b378e72675b15caff021f957a824d1f01420774/packages/micromark-core-commonmark/dev/lib/code-text.js>
 export const keyboard = (options: IOptions = {}) => {

@@ -1,10 +1,8 @@
 import type { State, Tokenizer, Resolver } from "micromark-util-types";
 
-import { resolveAll } from "micromark-util-resolve-all";
-import { classifyCharacter } from "micromark-util-classify-character";
-import { splice } from "micromark-util-chunked";
-import * as symbol from "micromark-util-symbol/types"; // weird import issues
-import * as symbol2 from "micromark-util-symbol/constants"; // weird import issues
+import { codes } from "micromark-util-symbol/codes";
+import { types } from "micromark-util-symbol/types";
+import { markdownLineEnding } from "micromark-util-character";
 
 interface IOptions {
   delimiter?: string | number;
@@ -12,7 +10,14 @@ interface IOptions {
 
 const DEFAULT_CHARACTER = "|";
 const DEFAULT_CHARACTER_CODE = DEFAULT_CHARACTER.charCodeAt(0);
+const BACKSLASH_CODE = "\\".charCodeAt(0);
 const REQUIRED_MARKERS = 2;
+
+const KEYBOARD_TYPE = "keyboardSequence";
+const KEYBOARD_TEXT_TYPE = types.codeTextData; // TODO check whether this is okay
+const KEYBOARD_TEXT_ESCAPE = "keyboardSequenceEscape";
+const KEYBOARD_SEQUENCE_MARKER = "keyboardSequenceMarker";
+const SPACE_TYPE = "space";
 
 export function transform(input: string): string {
   return input;
@@ -20,10 +25,10 @@ export function transform(input: string): string {
 
 export const html = {
   enter: {
-    kbd: enterKbdData,
+    [KEYBOARD_TYPE]: enterKbdData,
   },
   exit: {
-    kbd: exitKbdData,
+    [KEYBOARD_TYPE]: exitKbdData,
   },
 };
 
@@ -35,9 +40,7 @@ function exitKbdData() {
   this.tag("</kbd>");
 }
 
-// adapted from
-// <https://github.com/micromark/micromark-extension-gfm-strikethrough/blob/1dcbb1c8ac9c9cdf1154a08d8c876089aca9b096/dev/lib/syntax.js#L31>
-// TODO extend this to allow configurable delimiters and nested sequences
+// adapted from <https://github.com/micromark/micromark/blob/1b378e72675b15caff021f957a824d1f01420774/packages/micromark-core-commonmark/dev/lib/code-text.js>
 export const keyboard = (options: IOptions = {}) => {
   const { delimiter: rawDelimiter } = options;
   const delimiter =
@@ -45,140 +48,131 @@ export const keyboard = (options: IOptions = {}) => {
       ? rawDelimiter.charCodeAt(0)
       : rawDelimiter || DEFAULT_CHARACTER_CODE;
 
-  const resolveAllKeyboard: Resolver = (events, context) => {
-    let index = -1;
-
-    // Walk through all events.
-    while (++index < events.length) {
-      // Find a token that can close.
-      if (
-        events[index][0] === "enter" &&
-        events[index][1].type === "kbdSequenceTemporary" &&
-        events[index][1]._close
-      ) {
-        let open = index;
-
-        // Now walk back to find an opener.
-        while (open--) {
-          // Find a token that can open the closer.
-          if (
-            events[open][0] === "exit" &&
-            events[open][1].type === "kbdSequenceTemporary" &&
-            events[open][1]._open &&
-            // If the sizes are the same:
-            events[index][1].end.offset - events[index][1].start.offset ===
-              events[open][1].end.offset - events[open][1].start.offset
-          ) {
-            events[index][1].type = "kbdSequence";
-            events[open][1].type = "kbdSequence";
-
-            const kbd = {
-              type: "kbd",
-              start: Object.assign({}, events[open][1].start),
-              end: Object.assign({}, events[index][1].end),
-            };
-
-            const text = {
-              type: "kbdText",
-              start: Object.assign({}, events[open][1].end),
-              end: Object.assign({}, events[index][1].start),
-            };
-
-            // Opening.
-            const nextEvents = [
-              ["enter", kbd, context],
-              ["enter", events[open][1], context],
-              ["exit", events[open][1], context],
-              ["enter", text, context],
-            ];
-
-            // Between.
-            splice(
-              nextEvents,
-              nextEvents.length,
-              0,
-              resolveAll(
-                context.parser.constructs.insideSpan.null,
-                events.slice(open + 1, index),
-                context,
-              ),
-            );
-
-            // Closing.
-            splice(nextEvents, nextEvents.length, 0, [
-              ["exit", text, context],
-              ["enter", events[index][1], context],
-              ["exit", events[index][1], context],
-              ["exit", kbd, context],
-            ]);
-
-            splice(events, open - 1, index - open + 3, nextEvents);
-
-            index = open + nextEvents.length - 2;
-            break;
-          }
-        }
-      }
-    }
-
-    index = -1;
-
-    while (++index < events.length) {
-      if (events[index][1].type === "kbdSequenceTemporary") {
-        events[index][1].type = symbol.types.data;
-      }
-    }
-
-    return events;
-  };
-
   const tokenizeKeyboard: Tokenizer = function (effects, ok, nok): State {
-    const { previous, events } = this;
-
     let size = 0;
 
-    return start;
+    const closingTokenizer: Tokenizer = function (effects, ok, nok): State {
+      let current = 0;
 
-    function start(code: number): void | State {
-      if (
-        code !== delimiter ||
-        (previous === delimiter &&
-          events[events.length - 1][1].type !== symbol.types.characterEscape)
-      ) {
+      function start(_code: number): void | State {
+        effects.enter(KEYBOARD_SEQUENCE_MARKER);
+        return closing;
+      }
+
+      function closing(code: number): void | State {
+        if (code === delimiter) {
+          effects.consume(code);
+          current++;
+
+          if (current === size) {
+            effects.exit(KEYBOARD_SEQUENCE_MARKER);
+            effects.exit(KEYBOARD_TYPE);
+            return ok(code);
+          } else {
+            return closing;
+          }
+        }
+
         return nok(code);
       }
 
-      effects.enter("kbdSequenceTemporary");
-      return more(code);
+      return start;
+    };
+
+    return start;
+
+    function start(_code: number): void | State {
+      effects.enter(KEYBOARD_TYPE);
+      effects.enter(KEYBOARD_SEQUENCE_MARKER);
+      return opening;
     }
 
-    function more(code: number): void | State {
-      const before = classifyCharacter(previous);
-
-      if (code === delimiter) {
-        // If this is the third marker, exit.
-        if (size > 1) return nok(code);
-        effects.consume(code);
-        size++;
-        return more;
+    function opening(code: number): void | State {
+      if (code !== delimiter && size < REQUIRED_MARKERS) {
+        return nok(code);
       }
 
-      if (size < REQUIRED_MARKERS) return nok(code);
-      const token = effects.exit("kbdSequenceTemporary");
-      const after = classifyCharacter(code);
-      token._open =
-        !after ||
-        (after === symbol2.constants.attentionSideAfter && Boolean(before));
-      token._close =
-        !before ||
-        (before === symbol2.constants.attentionSideAfter && Boolean(after));
-      return ok(code);
+      if (code === delimiter) {
+        effects.consume(code);
+        size++;
+        return opening;
+      }
+
+      effects.exit(KEYBOARD_SEQUENCE_MARKER);
+      return gap;
+    }
+
+    function gap(code: number): void | State {
+      if (code === codes.eof) {
+        return nok(code);
+      }
+
+      if (code === delimiter) {
+        return effects.attempt(
+          {
+            tokenize: closingTokenizer,
+            partial: true,
+          },
+          ok,
+          (code) => {
+            consumeLiteral(code);
+            return gap;
+          },
+        );
+      }
+
+      if (code === codes.space) {
+        effects.enter(SPACE_TYPE);
+        effects.consume(code);
+        effects.exit(SPACE_TYPE);
+        return gap;
+      }
+
+      if (markdownLineEnding(code)) {
+        effects.enter(types.lineEnding);
+        effects.consume(code);
+        effects.exit(types.lineEnding);
+        return gap;
+      }
+
+      effects.enter(KEYBOARD_TEXT_TYPE);
+      return data(code);
+    }
+
+    function data(code: number): void | State {
+      if (
+        code === codes.eof ||
+        code === codes.space ||
+        code === delimiter ||
+        markdownLineEnding(code)
+      ) {
+        effects.exit(KEYBOARD_TEXT_TYPE);
+        return gap(code);
+      }
+
+      if (code === BACKSLASH_CODE) {
+        effects.exit(KEYBOARD_TEXT_TYPE);
+        effects.consume(code);
+        effects.enter(KEYBOARD_TEXT_TYPE);
+        return (code) => {
+          consumeLiteral(code);
+          return data;
+        };
+      }
+
+      effects.consume(code);
+      return data;
+    }
+
+    function consumeLiteral(code: number): void | State {
+      effects.enter(KEYBOARD_TEXT_ESCAPE);
+      effects.consume(code);
+      effects.exit(KEYBOARD_TEXT_ESCAPE);
     }
   };
 
   const tokenizer = {
     tokenize: tokenizeKeyboard,
-    resolveAll: resolveAllKeyboard,
   };
 
   return {

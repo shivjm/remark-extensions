@@ -10,9 +10,11 @@ describe("Transformation", () => {
     const cases: readonly [string, string | undefined, string][] = [
       ["||Ctrl||", undefined, "<p><kbd>Ctrl</kbd></p>"],
       ["||Ctrl||", "|", "<p><kbd>Ctrl</kbd></p>"],
+      ["|| Ctrl ||", "|", "<p><kbd>Ctrl</kbd></p>"],
       ["++Ctrl++", "|", "<p>++Ctrl++</p>"],
       ["++Ctrl++", "+", "<p><kbd>Ctrl</kbd></p>"],
-      // ["|| \\| ||", undefined, "<p><kbd>|</kbd></p>"],
+      ["||\\|||", undefined, "<p><kbd>|</kbd></p>"],
+      ["|| \\| ||", undefined, "<p><kbd>|</kbd></p>"],
       // [
       //   "||| ||x|| + ||Alt|| + ||hello|| |||",
       //   undefined,

@@ -8,15 +8,13 @@ interface IOptions {
   delimiter?: string | number;
 }
 
-const DEFAULT_CHARACTER = "|";
-const DEFAULT_CHARACTER_CODE = DEFAULT_CHARACTER.charCodeAt(0);
-const BACKSLASH_CODE = "\\".charCodeAt(0);
-const REQUIRED_MARKERS = 2;
+const MINIMUM_MARKER_LENGTH = 2;
 
 const KEYBOARD_TYPE = "keyboardSequence";
 const KEYBOARD_TEXT_TYPE = types.codeTextData; // TODO check whether this is okay
-const KEYBOARD_TEXT_ESCAPE = "keyboardSequenceEscape";
-const KEYBOARD_SEQUENCE_MARKER = "keyboardSequenceMarker";
+const KEYBOARD_TEXT_ESCAPE_TYPE = "keyboardSequenceEscape";
+const KEYBOARD_MARKER_TYPE = "keyboardSequenceMarker";
+
 const SPACE_TYPE = "space";
 
 export const html = {
@@ -38,7 +36,7 @@ export const keyboard = (options: IOptions = {}) => {
   const delimiter =
     typeof rawDelimiter === "string"
       ? rawDelimiter.charCodeAt(0)
-      : rawDelimiter || DEFAULT_CHARACTER_CODE;
+      : rawDelimiter || codes.verticalBar;
 
   const tokenizeKeyboard: Tokenizer = function (effects, ok, nok): State {
     let size = 0;
@@ -47,12 +45,12 @@ export const keyboard = (options: IOptions = {}) => {
 
     function start(_code: number): void | State {
       effects.enter(KEYBOARD_TYPE);
-      effects.enter(KEYBOARD_SEQUENCE_MARKER);
+      effects.enter(KEYBOARD_MARKER_TYPE);
       return opening;
     }
 
     function opening(code: number): void | State {
-      if (code !== delimiter && size < REQUIRED_MARKERS) {
+      if (code !== delimiter && size < MINIMUM_MARKER_LENGTH) {
         return nok(code);
       }
 
@@ -62,7 +60,7 @@ export const keyboard = (options: IOptions = {}) => {
         return opening;
       }
 
-      effects.exit(KEYBOARD_SEQUENCE_MARKER);
+      effects.exit(KEYBOARD_MARKER_TYPE);
       return gap;
     }
 
@@ -122,7 +120,7 @@ export const keyboard = (options: IOptions = {}) => {
         return gap(code);
       }
 
-      if (code === BACKSLASH_CODE) {
+      if (code === codes.backslash) {
         effects.exit(KEYBOARD_TEXT_TYPE);
         effects.consume(code);
         effects.enter(KEYBOARD_TEXT_TYPE);
@@ -137,9 +135,9 @@ export const keyboard = (options: IOptions = {}) => {
     }
 
     function consumeLiteral(code: number): void | State {
-      effects.enter(KEYBOARD_TEXT_ESCAPE);
+      effects.enter(KEYBOARD_TEXT_ESCAPE_TYPE);
       effects.consume(code);
-      effects.exit(KEYBOARD_TEXT_ESCAPE);
+      effects.exit(KEYBOARD_TEXT_ESCAPE_TYPE);
     }
   };
 
@@ -159,7 +157,7 @@ function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
     let current = 0;
 
     function start(_code: number): void | State {
-      effects.enter(KEYBOARD_SEQUENCE_MARKER);
+      effects.enter(KEYBOARD_MARKER_TYPE);
       return closing;
     }
 
@@ -169,7 +167,7 @@ function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
         current++;
 
         if (current === size) {
-          effects.exit(KEYBOARD_SEQUENCE_MARKER);
+          effects.exit(KEYBOARD_MARKER_TYPE);
           effects.exit(KEYBOARD_TYPE);
           return ok(code);
         } else {

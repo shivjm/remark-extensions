@@ -2,9 +2,9 @@
   "name": "micromark-extension-kbd-nested",
   "version": "0.0.1",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "rimraf src/**/*.js && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",
     "test": "nyc mocha tests/**/*.ts"
   },

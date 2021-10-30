@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
+    "build": "rimraf src/**/*.js && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",
     "test": "nyc mocha tests/**/*.ts"
   },
@@ -26,6 +27,7 @@
     "mocha": "^9.1.2",
     "nyc": "^15.1.0",
     "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.4"
   },

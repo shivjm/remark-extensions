@@ -51,34 +51,6 @@ export const keyboard = (options: IOptions = {}) => {
   const tokenizeKeyboard: Tokenizer = function (effects, ok, nok): State {
     let size = 0;
 
-    const closingTokenizer: Tokenizer = function (effects, ok, nok): State {
-      let current = 0;
-
-      function start(_code: number): void | State {
-        effects.enter(KEYBOARD_SEQUENCE_MARKER);
-        return closing;
-      }
-
-      function closing(code: number): void | State {
-        if (code === delimiter) {
-          effects.consume(code);
-          current++;
-
-          if (current === size) {
-            effects.exit(KEYBOARD_SEQUENCE_MARKER);
-            effects.exit(KEYBOARD_TYPE);
-            return ok(code);
-          } else {
-            return closing;
-          }
-        }
-
-        return nok(code);
-      }
-
-      return start;
-    };
-
     return start;
 
     function start(_code: number): void | State {
@@ -110,7 +82,7 @@ export const keyboard = (options: IOptions = {}) => {
       if (code === delimiter) {
         return effects.attempt(
           {
-            tokenize: closingTokenizer,
+            tokenize: makeClosingTokenizer(delimiter, size),
             partial: true,
           },
           ok,
@@ -187,3 +159,33 @@ export const keyboard = (options: IOptions = {}) => {
     attentionMarkers: { null: [delimiter] },
   };
 };
+
+function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
+  return function (effects, ok, nok) {
+    let current = 0;
+
+    function start(_code: number): void | State {
+      effects.enter(KEYBOARD_SEQUENCE_MARKER);
+      return closing;
+    }
+
+    function closing(code: number): void | State {
+      if (code === delimiter) {
+        effects.consume(code);
+        current++;
+
+        if (current === size) {
+          effects.exit(KEYBOARD_SEQUENCE_MARKER);
+          effects.exit(KEYBOARD_TYPE);
+          return ok(code);
+        } else {
+          return closing;
+        }
+      }
+
+      return nok(code);
+    }
+
+    return start;
+  };
+}

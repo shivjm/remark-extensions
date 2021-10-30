@@ -15,11 +15,11 @@ describe("Transformation", () => {
       ["++Ctrl++", "+", "<p><kbd>Ctrl</kbd></p>"],
       ["||\\|||", undefined, "<p><kbd>|</kbd></p>"],
       ["|| \\| ||", undefined, "<p><kbd>|</kbd></p>"],
-      // [
-      //   "||| ||x|| + ||Alt|| + ||hello|| |||",
-      //   undefined,
-      //   "<p><kbd>x</kbd> + <kbd>Alt</kbd> + <kbd>hello</kbd></p>",
-      // ],
+      [
+        "||| ||x|| + ||Alt|| + ||hello|| |||",
+        undefined,
+        "<p><kbd><kbd>x</kbd>+<kbd>Alt</kbd>+<kbd>hello</kbd></kbd></p>",
+      ],
       ["||a|| bc ||d", undefined, "<p><kbd>a</kbd> bc ||d</p>"], // remove orphans
     ];
 

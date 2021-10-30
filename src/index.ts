@@ -115,8 +115,14 @@ export const keyboard = (options: IOptions = {}) => {
           },
           ok,
           (code) => {
-            consumeLiteral(code);
-            return gap;
+            return effects.attempt(
+              { tokenize: tokenizeKeyboard, partial: true },
+              gap,
+              (code) => {
+                consumeLiteral(code);
+                return gap;
+              },
+            );
           },
         );
       }

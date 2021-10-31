@@ -1,7 +1,7 @@
 {
   "name": "micromark-extension-kbd-nested",
   "version": "0.0.1",
-  "description": "",
+  "description": "micromark extension for `kbd` elements with nesting, escaping & configurable delimiter",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",

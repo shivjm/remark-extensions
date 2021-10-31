@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",
+    "prepublish": "npm run build",
     "test": "nyc mocha tests/**/*.ts"
   },
   "author": "Shiv Jha-Mathur",

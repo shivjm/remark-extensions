@@ -1,58 +1,54 @@
 lockfileVersion: 5.3
 
-importers:
+specifiers:
+  '@types/chai': ^4.2.22
+  '@types/mocha': ^9.0.0
+  '@types/node': ^16.10.1
+  '@typescript-eslint/eslint-plugin': ^4.32.0
+  '@typescript-eslint/parser': ^4.32.0
+  chai: ^4.3.4
+  eslint: ^7.32.0
+  eslint-config-prettier: ^8.3.0
+  eslint-plugin-prettier: ^4.0.0
+  micromark: ^3.0.7
+  micromark-util-character: ^1.1.0
+  micromark-util-chunked: ^1.0.0
+  micromark-util-resolve-all: ^1.0.0
+  micromark-util-symbol: ^1.0.0
+  micromark-util-types: ^1.0.1
+  mocha: ^9.1.2
+  nyc: ^15.1.0
+  prettier: ^2.4.1
+  remark: ^14.0.1
+  rimraf: ^3.0.2
+  ts-node: ^10.2.1
+  typescript: ^4.4.4
 
-  .:
-    specifiers: {}
+dependencies:
+  micromark-util-character: 1.1.0
+  micromark-util-chunked: 1.0.0
+  remark: 14.0.1
 
-  packages/micromark-extension-kbd-nested:
-    specifiers:
-      '@types/chai': ^4.2.22
-      '@types/mocha': ^9.0.0
-      '@types/node': ^16.10.1
-      '@typescript-eslint/eslint-plugin': ^4.32.0
-      '@typescript-eslint/parser': ^4.32.0
-      chai: ^4.3.4
-      eslint: ^7.32.0
-      eslint-config-prettier: ^8.3.0
-      eslint-plugin-prettier: ^4.0.0
-      micromark: ^3.0.7
-      micromark-util-character: ^1.1.0
-      micromark-util-chunked: ^1.0.0
-      micromark-util-resolve-all: ^1.0.0
-      micromark-util-symbol: ^1.0.0
-      micromark-util-types: ^1.0.1
-      mocha: ^9.1.2
-      nyc: ^15.1.0
-      prettier: ^2.4.1
-      remark: ^14.0.1
-      rimraf: ^3.0.2
-      ts-node: ^10.2.1
-      typescript: ^4.4.4
-    dependencies:
-      micromark-util-character: 1.1.0
-      micromark-util-chunked: 1.0.0
-      remark: 14.0.1
-    devDependencies:
-      '@types/chai': 4.2.22
-      '@types/mocha': 9.0.0
-      '@types/node': 16.11.6
-      '@typescript-eslint/eslint-plugin': 4.33.0_cc617358c89d3f38c52462f6d809db4c
-      '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.4.4
-      chai: 4.3.4
-      eslint: 7.32.0
-      eslint-config-prettier: 8.3.0_eslint@7.32.0
-      eslint-plugin-prettier: 4.0.0_6e975bd57c7acf028c1a9ddbbf60c898
-      micromark: 3.0.7
-      micromark-util-resolve-all: 1.0.0
-      micromark-util-symbol: 1.0.0
-      micromark-util-types: 1.0.1
-      mocha: 9.1.3
-      nyc: 15.1.0
-      prettier: 2.4.1
-      rimraf: 3.0.2
-      ts-node: 10.4.0_0cb88d80cb04d25b21fa3ec194608c65
-      typescript: 4.4.4
+devDependencies:
+  '@types/chai': 4.2.22
+  '@types/mocha': 9.0.0
+  '@types/node': 16.11.6
+  '@typescript-eslint/eslint-plugin': 4.33.0_cc617358c89d3f38c52462f6d809db4c
+  '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.4.4
+  chai: 4.3.4
+  eslint: 7.32.0
+  eslint-config-prettier: 8.3.0_eslint@7.32.0
+  eslint-plugin-prettier: 4.0.0_6e975bd57c7acf028c1a9ddbbf60c898
+  micromark: 3.0.7
+  micromark-util-resolve-all: 1.0.0
+  micromark-util-symbol: 1.0.0
+  micromark-util-types: 1.0.1
+  mocha: 9.1.3
+  nyc: 15.1.0
+  prettier: 2.4.1
+  rimraf: 3.0.2
+  ts-node: 10.4.0_0cb88d80cb04d25b21fa3ec194608c65
+  typescript: 4.4.4
 
 packages:
 

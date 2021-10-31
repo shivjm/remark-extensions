@@ -2,8 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
-    "outDir": "dist"
+    "module": "commonjs"
   },
   "exclude": ["tests"]
 }

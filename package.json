@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "micromark extension for `kbd` elements with nesting, escaping & configurable delimiter",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=12",
+    "pnpm": ">=6"
+  },
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",

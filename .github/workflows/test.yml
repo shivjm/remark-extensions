@@ -27,6 +27,10 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
+
+      # TODO add coverage using
+      # <https://github.com/marketplace/actions/code-coverage-summary>
+      # once nyc works again
   check-build-files:
     runs-on: ubuntu-latest
     steps:

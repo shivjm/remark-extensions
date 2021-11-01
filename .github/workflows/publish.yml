@@ -5,8 +5,8 @@ on:
 name: publish-to-npmjs
 
 env:
-  PNPM_VERSION: '6.19.1'
-  NODE_VERSION: '14.17.3'
+  PNPM_VERSION: "6.19.1"
+  NODE_VERSION: "14.17.3"
 
 jobs:
   publish:
@@ -29,4 +29,5 @@ jobs:
           package=`echo "${{ github.release.name }}" | cut -d ' ' -f 1`
           cd packages/$package
           pnpm install --frozen-lockfile --filter "$package"
+          pnpm run build --filter "$package"
           pnpm publish --filter "$package"

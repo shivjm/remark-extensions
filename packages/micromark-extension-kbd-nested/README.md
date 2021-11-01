@@ -40,15 +40,19 @@ console.log(output)
 Yields:
 
 ```html
-<p>Press <kbd><kbd>Ctrl</kbd>+<kbd>|</kbd></kbd>.</p>
+<p>Press <kbd><kbd>Ctrl</kbd> + <kbd> | </kbd></kbd>.</p>
 ```
 
 ## Syntax
 
 Recognizes any sequence of two or more unescaped occurrences of the
-delimiter. Nesting is possible by using a longer sequence on the
-outside and a shorter sequence on the inside, e.g. `||| ||Ctrl|| +
-||x|| |||`. The sequence will be considered to end at the first whitespace character or non-delimiter, including escape characters. For example, these will all produce `<kbd>|</kbd>`:
+delimiter. All whitespace will be preserved except immediately after
+the opening sequence and immediately before the closing sequence.
+Nesting is possible by using a longer sequence on the outside and a
+shorter sequence on the inside, e.g. `||| ||Ctrl|| + ||x|| |||`. The
+sequence will be considered to end at the first whitespace character
+or non-delimiter, including escape characters. For example, these will
+all produce `<kbd>|</kbd>`:
 
 * `||\|||`
 * `|| | ||`

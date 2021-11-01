@@ -30,7 +30,8 @@ describe("works for simple cases", () => {
     ["| ||Ctrl|| |", undefined, "<p>| <kbd>Ctrl</kbd> |</p>"],
     ["||Ctrl||", "|", "<p><kbd>Ctrl</kbd></p>"],
     ["|| Ctrl ||", "|", "<p><kbd>Ctrl</kbd></p>"],
-    ["||a|| bc ||d", undefined, "<p><kbd>a</kbd> bc ||d</p>"], // remove orphans
+    ["|| npm run build ||", undefined, "<p><kbd>npm run build</kbd></p>"],
+    ["||a|| bc ||d", undefined, "<p><kbd>a</kbd> bc d</p>"], // remove orphans
   ]);
 });
 
@@ -38,7 +39,6 @@ describe("handles different delimiters", () => {
   runCases([
     ["++Ctrl++", "|", "<p>++Ctrl++</p>"],
     ["++Ctrl++", "+", "<p><kbd>Ctrl</kbd></p>"],
-    ["|| \\| \\| || \\|", undefined, "<p><kbd>||</kbd> |</p>"],
   ]);
 });
 
@@ -46,20 +46,23 @@ describe("handles escaping", () => {
   runCases([
     ["||\\|||", undefined, "<p><kbd>|</kbd></p>"],
     ["|| \\| ||", undefined, "<p><kbd>|</kbd></p>"],
+    ["|| \\| \\| || \\|", undefined, "<p><kbd>| |</kbd> |</p>"],
+    ["|| \\  ||", undefined, "<p><kbd> </kbd></p>"],
+    ["++ \\  ++", "+", "<p><kbd> </kbd></p>"],
   ]);
 });
 
 describe("handles nesting", () => {
   runCases([
     [
-      "||| ||Ctrl|| + ||Alt|| + ||x|| |||",
+      "|||  ||Ctrl||  +  ||Alt|| + ||x||  |||",
       undefined,
-      "<p><kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>x</kbd></kbd></p>",
+      "<p><kbd><kbd>Ctrl</kbd>  +  <kbd>Alt</kbd> + <kbd>x</kbd></kbd></p>",
     ],
     [
       "||||| ||Ctrl|| + |||| Alt |||| + |||x||| |||||",
       undefined,
-      "<p><kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>x</kbd></kbd></p>",
+      "<p><kbd><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>x</kbd></kbd></p>",
     ],
   ]);
 });
@@ -67,9 +70,14 @@ describe("handles nesting", () => {
 describe("handles everything together", () => {
   runCases([
     [
-      "@@@@@ @@Ctrl@@ + @@@@ Alt @@@@ + @@@\\@@@@ @@@@@",
+      "@@@@@ @@Ctrl@@ + @@@@ Alt @@@@ + @@@ \\@@@@ @@@@@",
       "@",
-      "<p><kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>@</kbd></kbd></p>",
+      "<p><kbd><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>@</kbd></kbd></p>",
+    ],
+    [
+      "@@@@@ @@Ctrl@@ + @@@@ Alt @@@@ + @@@ \\ @@@ @@@@@",
+      "@",
+      "<p><kbd><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd> </kbd></kbd></p>",
     ],
   ]);
 });

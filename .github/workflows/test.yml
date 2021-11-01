@@ -26,9 +26,9 @@ jobs:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile -r
+        run: pnpm install --frozen-lockfile
       - name: Run tests
-        run: pnpm test -r
+        run: pnpm test
 
       # TODO add coverage using
       # <https://github.com/marketplace/actions/code-coverage-summary>
@@ -48,6 +48,7 @@ jobs:
         with:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
-        run: pnpm install --frozen-lockfile -r
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
       - name: Run build
-        run: pnpm run build -r
+        run: pnpm run build

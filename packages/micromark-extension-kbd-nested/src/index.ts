@@ -3,7 +3,7 @@ import { codes } from "micromark-util-symbol/codes";
 import { types } from "micromark-util-symbol/types";
 import { markdownLineEnding } from "micromark-util-character";
 
-interface IOptions {
+export interface IOptions {
   delimiter?: string | number;
 }
 
@@ -33,11 +33,7 @@ export const html = {
 
 // adapted from <https://github.com/micromark/micromark/blob/1b378e72675b15caff021f957a824d1f01420774/packages/micromark-core-commonmark/dev/lib/code-text.js>
 export const syntax = (options: IOptions = {}): Extension => {
-  const { delimiter: rawDelimiter } = options;
-  const delimiter =
-    typeof rawDelimiter === "string"
-      ? rawDelimiter.charCodeAt(0)
-      : rawDelimiter || codes.verticalBar;
+  const delimiter = normalizeDelimiter(options.delimiter);
 
   const tokenizeKeyboard: Tokenizer = function (effects, ok, nok): State {
     let size = 0;
@@ -185,4 +181,12 @@ function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
 
     return start;
   };
+}
+
+export function normalizeDelimiter(
+  delimiter: string | number | undefined,
+): number {
+  return typeof delimiter === "string"
+    ? delimiter.charCodeAt(0)
+    : delimiter || codes.verticalBar;
 }

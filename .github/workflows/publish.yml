@@ -33,14 +33,12 @@ jobs:
         # token isn’t written to the file; instead, npm should replace
         # it at runtime.
 
-        # the release object appears to lack the name, so we use the
-        # CLI to fetch it.
         run: |
-          package=`gh release view -q '.name' --json name "${{ github.release.tag_name }}" | cut -d ' ' -f 1`
+          package=`"${{ github.release.release.name }}" | cut -d ' ' -f 1`
 
           echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 
           cd packages/$package
-          pnpm install --frozen-lockfile --filter "$package"
+          pnpm install --frozen-lockfile --filter "$package..."
           pnpm run build --filter "$package"
           pnpm publish --no-git-checks --filter "$package"

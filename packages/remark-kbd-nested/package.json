@@ -4,7 +4,7 @@
   "description": "remark plugin to add support for `kbd` element syntax with configurable delimiters, escaping, and arbitrary nesting",
   "main": "index.ts",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "rimraf lib && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",
     "test": "mocha tests/**/*.ts"
   },

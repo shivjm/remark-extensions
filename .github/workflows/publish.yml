@@ -41,6 +41,6 @@ jobs:
           echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 
           cd packages/$package
-          pnpm install --frozen-lockfile --filter "$package"
+          pnpm install --frozen-lockfile --filter "$package..."
           pnpm run build --filter "$package"
           pnpm publish --no-git-checks --filter "$package"

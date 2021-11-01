@@ -37,6 +37,8 @@ jobs:
             echo ::set-output name=prerelease::true
           fi
       - name: Create draft release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # TODO see about using Docker image instead of downloading at runtime
 
         # code adapted from <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L84>

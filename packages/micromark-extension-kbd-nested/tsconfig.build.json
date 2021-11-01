@@ -2,5 +2,9 @@
   "extends": "../tsconfig.build.json",
   "include": ["src"],
   "exclude": ["node_modules", "tests"],
-  "outDir": "dist"
+  "compilerOptions": {
+    "outDir": "lib",
+    "declaration": true,
+    "declarationDir": "lib"
+  }
 }

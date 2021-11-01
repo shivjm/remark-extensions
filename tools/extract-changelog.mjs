@@ -25,7 +25,7 @@ async function extractChangelog(filename) {
   const lines = [];
 
   for await (const l of rl) {
-    if (l.startsWith(MARKER)) {
+    if (l.startsWith(MARKER) && !started) {
       started = true;
       continue;
     }

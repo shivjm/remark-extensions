@@ -6,7 +6,6 @@ env:
   # adapted from <https://gist.github.com/rverst/1f0b97da3cbeb7d93f4986df6e8e5695#file-check_semver-sh-L5>
   TAG_RE: '^(.+)-v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a
 -zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$'
-  PARSE_CHANGELOG_URL: "https://github.com/taiki-e/parse-changelog/releases/download/v0.4.5/parse-changelog-x86_64-unknown-linux-gnu.tar.gz"
 
 jobs:
   release:
@@ -45,8 +44,7 @@ jobs:
         run: |
           package="${{ steps.version.outputs.package }}"
           version="${{ steps.version.outputs.version }}"
-          curl -LsSf "$PARSE_CHANGELOG_URL" | tar xzf -
-          notes=$(./parse-changelog packages/${package}/CHANGELOG.md "${version#v}")
+          notes=$(node tools/extract-changelog.mjs packages/${package}/CHANGELOG.md "${version#v}")
           tag="${{ steps.version.outputs.raw }}"
 
           if gh release view "${tag}" &>/dev/null; then

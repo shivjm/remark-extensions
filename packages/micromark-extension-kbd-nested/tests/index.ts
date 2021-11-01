@@ -38,6 +38,7 @@ describe("handles different delimiters", () => {
   runCases([
     ["++Ctrl++", "|", "<p>++Ctrl++</p>"],
     ["++Ctrl++", "+", "<p><kbd>Ctrl</kbd></p>"],
+    ["|| \\| \\| || \\|", undefined, "<p><kbd>||</kbd> |</p>"],
   ]);
 });
 

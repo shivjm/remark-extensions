@@ -1,0 +1,33 @@
+on:
+  release:
+    types: [published]
+
+name: publish-to-npmjs
+
+env:
+  PNPM_VERSION: "6.19.1"
+  NODE_VERSION: "14.17.3"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: "${{ env.PNPM_VERSION }}"
+      - uses: actions/setup-node@v2
+        with:
+          cache: pnpm
+          node-version: "${{ env.NODE_VERSION }}"
+      - name: Publish single module
+        run: |
+          package=`echo "${{ github.release.name }}" | cut -d ' ' -f 1`
+          cd packages/$package
+          pnpm install --frozen-lockfile --filter "$package"
+          pnpm run build --filter "$package"
+          pnpm publish --filter "$package"

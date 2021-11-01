@@ -20,7 +20,7 @@
     "url": "https://github.com/shivjm/remark-extensions.git"
   },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "rimraf lib && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",
     "test": "nyc mocha tests/**/*.ts"
   },

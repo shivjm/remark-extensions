@@ -51,7 +51,3 @@ jobs:
         run: pnpm install --frozen-lockfile -r
       - name: Run build
         run: pnpm run build -r
-      - name: Check diff output
-        run: |
-          STATUS="$(git status -s)"
-          [ ${#STATUS} -eq 0 ] || (echo "Dirty files after build:\n$STATUS\n$(git diff)" && exit 1)

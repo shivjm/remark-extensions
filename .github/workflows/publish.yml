@@ -34,7 +34,7 @@ jobs:
         # it at runtime.
 
         run: |
-          package=`"${{ github.release.release.name }}" | cut -d ' ' -f 1`
+          package=`"${{ github.event.release.name }}" | cut -d ' ' -f 1`
 
           echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 

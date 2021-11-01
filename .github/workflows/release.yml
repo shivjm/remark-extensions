@@ -27,7 +27,7 @@ jobs:
           fi
 
           package="${BASH_REMATCH[1]}"
-          prerelease="${BASH_REMATCH[5]}""
+          prerelease="${BASH_REMATCH[5]}"
 
           echo ::set-output name=package::$package
           echo ::set-output name=version::${tag#"${package}-"}
@@ -35,7 +35,7 @@ jobs:
 
           if [[ ${#prerelease} -ne 0 ]]; then
             echo ::set-output name=prerelease::true
-          else
+          fi
       - name: Create draft release
         env:
           tag: ${{ github.ref }}

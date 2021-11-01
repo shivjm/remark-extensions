@@ -81,7 +81,10 @@ export const syntax = (options: IOptions = {}): Extension => {
           ok,
           () => {
             return effects.attempt(
-              { tokenize: tokenizeKeyboard, partial: true },
+              {
+                tokenize: tokenizeKeyboard,
+                partial: true,
+              },
               gap,
               (code) => {
                 consumeLiteral(code);

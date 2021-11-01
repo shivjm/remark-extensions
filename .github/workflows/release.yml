@@ -1,13 +1,58 @@
-on:
-  push:
-    branches:
-      - main
-name: release-please
+on: create
+
+name: create-draft-release
+
+env:
+  # adapted from <https://gist.github.com/rverst/1f0b97da3cbeb7d93f4986df6e8e5695#file-check_semver-sh-L5>
+  TAG_RE: '^(.+)-v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a
+-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$'
+  PARSE_CHANGELOG_URL: "https://github.com/taiki-e/parse-changelog/releases/download/v0.4.5/parse-changelog-x86_64-unknown-linux-gnu.tar.gz"
+
 jobs:
   release-please:
+    if: ${{ github.ref_type == 'tag' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v2
-        with:
-          release-type: node
-          package-name: release-please-action
+      - uses: actions/checkout@v2
+      - name: Parse version
+        id: version
+        # adapted from
+        # <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L28>
+        run: |
+          if [[ ! "${tag}" =~ $TAG_RE ]]; then
+            error "invalid tag format: '${tag}'"
+            exit 1
+          fi
+
+          package="${BASH_REMATCH[1]}"
+          prerelease="${BASH_REMATCH[5]}""
+
+          echo ::set-output name=package::$package
+          echo ::set-output name=version::${tag#"${package}-"}
+          echo ::set-output name=prerelease::false
+
+          if [[ ${#prerelease} -ne 0 ]]; then
+            echo ::set-output name=prerelease::true
+          else
+      - name: Create draft release
+        env:
+          tag: ${{ github.ref }}
+
+        # TODO see about using Docker image instead of downloading at runtime
+
+        # code adapted from <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L84>
+        run: |
+          package="${{ steps.version.outputs.package }}"
+          version="${{ steps.version.outputs.version }}"
+          curl -LsSf "$PARSE_CHANGELOG_URL" | tar xzf -
+          notes=$(./parse-changelog packages/${package}/CHANGELOG.md "$version")
+
+          if gh release view "${tag}" &>/dev/null; then
+            gh release delete "${tag}" -y
+          fi
+
+          if ${{ steps.version.outputs.prerelease }}; then
+            prerelease="--prerelease"
+          fi
+
+          gh release create "${tag}" $prerelease --draft --title "${package} ${version}" --notes "${notes}"

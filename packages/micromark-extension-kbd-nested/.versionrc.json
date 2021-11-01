@@ -1,0 +1,5 @@
+{
+  "path": ".",
+  "tag-prefix": "micromark-extension-kbd-nested-",
+  "releaseCommitMessageFormat": "chore(release): micromark-extension-kbd-nested@{{currentTag}}"
+}

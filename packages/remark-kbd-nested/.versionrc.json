@@ -1,7 +1,7 @@
 {
   "path": ".",
-  "tag-prefix": "micromark-extension-kbd-nested-v",
-  "releaseCommitMessageFormat": "chore(release): micromark-extension-kbd-nested@{{currentTag}}",
+  "tag-prefix": "remark-kbd-nested-v",
+  "releaseCommitMessageFormat": "chore(release): remark-kbd-nested@{{currentTag}}",
   "types": [
     {"type":"feat","section":"Features"},
     {"type":"fix","section":"Bug Fixes"},

@@ -33,4 +33,4 @@ jobs:
           cd packages/$package
           pnpm install --frozen-lockfile --filter "$package"
           pnpm run build --filter "$package"
-          pnpm publish --filter "$package"
+          pnpm publish --no-git-checks --filter "$package"

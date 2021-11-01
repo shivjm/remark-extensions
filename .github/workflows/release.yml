@@ -18,6 +18,8 @@ jobs:
         id: version
         # adapted from
         # <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L28>
+        env:
+          tag: ${{ github.ref }}
         run: |
           if [[ ! "${tag}" =~ $TAG_RE ]]; then
             echo "invalid tag format: '${tag}'"

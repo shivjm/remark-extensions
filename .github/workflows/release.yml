@@ -44,7 +44,7 @@ jobs:
           package="${{ steps.version.outputs.package }}"
           version="${{ steps.version.outputs.version }}"
           curl -LsSf "$PARSE_CHANGELOG_URL" | tar xzf -
-          notes=$(./parse-changelog packages/${package}/CHANGELOG.md "$version")
+          notes=$(./parse-changelog packages/${package}/CHANGELOG.md "${version#v}")
           tag="${{ steps.version.outputs.raw }}"
 
           if gh release view "${tag}" &>/dev/null; then

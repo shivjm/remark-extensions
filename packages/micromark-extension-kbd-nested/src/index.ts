@@ -1,4 +1,11 @@
-import type { Event, Extension, State, Tokenizer } from "micromark-util-types";
+import type {
+  Code,
+  CompileContext,
+  Event,
+  Extension,
+  State,
+  Tokenizer,
+} from "micromark-util-types";
 import { codes } from "micromark-util-symbol/codes";
 import { types } from "micromark-util-symbol/types";
 import { markdownLineEnding } from "micromark-util-character";
@@ -16,15 +23,14 @@ const KEYBOARD_MARKER_TYPE = "keyboardSequenceMarker";
 
 const SPACE_TYPE = "space";
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call */
-export const html = {
+export const html: Extension = {
   enter: {
-    [KEYBOARD_TYPE]: function (): void {
+    [KEYBOARD_TYPE]: function (this: CompileContext): void {
       this.tag("<kbd>");
     },
   },
   exit: {
-    [KEYBOARD_TYPE]: function (): void {
+    [KEYBOARD_TYPE]: function (this: CompileContext): void {
       this.tag("</kbd>");
     },
   },
@@ -46,7 +52,7 @@ export const syntax = (options: IOptions = {}): Extension => {
       return opening;
     }
 
-    function opening(code: number): void | State {
+    function opening(code: Code): void | State {
       if (code !== delimiter && size < MINIMUM_MARKER_LENGTH) {
         return nok(code);
       }
@@ -61,7 +67,7 @@ export const syntax = (options: IOptions = {}): Extension => {
       return gap;
     }
 
-    function gap(code: number): void | State {
+    function gap(code: Code): void | State {
       if (code === codes.eof) {
         return nok(code);
       }
@@ -109,7 +115,7 @@ export const syntax = (options: IOptions = {}): Extension => {
       return data(code);
     }
 
-    function data(code: number): void | State {
+    function data(code: Code): void | State {
       if (
         code === codes.eof ||
         code === codes.space ||
@@ -134,7 +140,7 @@ export const syntax = (options: IOptions = {}): Extension => {
       return data;
     }
 
-    function consumeLiteral(code: number): void | State {
+    function consumeLiteral(code: Code): void | State {
       effects.enter(KEYBOARD_TEXT_ESCAPE_TYPE);
       effects.consume(code);
       effects.exit(KEYBOARD_TEXT_ESCAPE_TYPE);
@@ -162,7 +168,7 @@ function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
       return closing;
     }
 
-    function closing(code: number): void | State {
+    function closing(code: Code): void | State {
       if (code === delimiter) {
         effects.consume(code);
         current++;

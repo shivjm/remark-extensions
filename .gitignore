@@ -1,6 +1,6 @@
 /node_modules/
 
-/packages/*/dist/
+/packages/*/lib/
 /packages/*/coverage/
 /packages/*/.nyc_output/
 /packages/*/node_modules/

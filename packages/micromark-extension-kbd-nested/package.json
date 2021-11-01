@@ -1,19 +1,33 @@
 {
   "name": "micromark-extension-kbd-nested",
   "version": "0.1.0",
-  "description": "micromark extension for `kbd` elements with nesting, escaping & configurable delimiter",
-  "main": "dist/index.js",
-  "engines": {
-    "node": ">=12",
-    "pnpm": ">=6"
+  "description": "micromark extension for `kbd` element syntax with nesting, escaping & configurable delimiter",
+  "keywords": [
+    "micromark",
+    "kbd",
+    "keyboard",
+    "markdown"
+  ],
+  "homepage": "https://github.com/shivjm/remark-extensions",
+  "bugs": {
+    "url": "https://github.com/shivjm/remark-extensions/issues"
+  },
+  "license": "ISC",
+  "author": "Shiv Jha-Mathur",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shivjm/remark-extensions.git"
   },
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "lint": "eslint src/**/*.ts",
     "test": "nyc mocha tests/**/*.ts"
   },
-  "author": "Shiv Jha-Mathur",
-  "license": "ISC",
+  "dependencies": {
+    "micromark-util-character": "^1.1.0",
+    "micromark-util-chunked": "^1.0.0"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
@@ -35,10 +49,13 @@
     "ts-node": "^10.2.1",
     "typescript": "^4.4.4"
   },
-  "dependencies": {
-    "micromark-util-character": "^1.1.0",
-    "micromark-util-chunked": "^1.0.0",
-    "remark": "^14.0.1"
+  "engines": {
+    "node": ">=12",
+    "pnpm": ">=6"
   },
-  "type": "module"
+  "type": "module",
+  "publishConfig": {
+    "main": "lib/index.js",
+    "typings": "index.d.ts"
+  }
 }

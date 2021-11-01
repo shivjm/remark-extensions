@@ -3,7 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "newLine": "lf"
+    "newLine": "lf",
+    "strict": true
   },
   "include": ["src/**/*", "tests/**/*"],
   "exclude": ["node_modules/*"]

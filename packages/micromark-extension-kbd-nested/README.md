@@ -4,7 +4,7 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-**[micromark][]** extension to support `kbd` elements with
+**[micromark][]** extension to support `kbd` element syntax with
 configurable delimiters, escaping, and arbitrary nesting (e.g.
 <kbd><kbd>Ctrl</kbd>+<kbd>x</kbd></kbd>). Based on
 [micromark-extension-kbd][].

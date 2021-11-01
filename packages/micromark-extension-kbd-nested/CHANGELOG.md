@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/shivjm/remark-extensions/compare/micromark-extension-kbd-nested-v0.1.0...micromark-extension-kbd-nested-v0.2.0) (2021-11-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **micromark-extension-kbd-nested:** put generated files under `lib`
+
+### Features
+
+* **micromark-extension-kbd-nested:** export new function `normalizeDelimiter` ([861a1e0](https://github.com/shivjm/remark-extensions/commit/861a1e0a60bf18be462deabb44684c7a392d53f3))
+
+
+### Build System
+
+* **micromark-extension-kbd-nested:** put generated files under `lib` ([19a9991](https://github.com/shivjm/remark-extensions/commit/19a9991aee4004bedb614b6a9d09888a8ad43668))
+
 ## 0.1.0 (2021-11-01)
 
 

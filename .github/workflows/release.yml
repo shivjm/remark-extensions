@@ -9,7 +9,7 @@ env:
   PARSE_CHANGELOG_URL: "https://github.com/taiki-e/parse-changelog/releases/download/v0.4.5/parse-changelog-x86_64-unknown-linux-gnu.tar.gz"
 
 jobs:
-  release-please:
+  release:
     if: ${{ github.ref_type == 'tag' }}
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
         # <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L28>
         run: |
           if [[ ! "${tag}" =~ $TAG_RE ]]; then
-            error "invalid tag format: '${tag}'"
+            echo "invalid tag format: '${tag}'"
             exit 1
           fi
 

@@ -18,9 +18,8 @@ jobs:
         id: version
         # adapted from
         # <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L28>
-        env:
-          tag: ${{ github.ref }}
         run: |
+          tag=$(echo "${{ github.ref }}" | rev | cut -d '/' -f 1 | rev)
           if [[ ! "${tag}" =~ $TAG_RE ]]; then
             echo "invalid tag format: '${tag}'"
             exit 1
@@ -32,14 +31,12 @@ jobs:
           echo ::set-output name=package::$package
           echo ::set-output name=version::${tag#"${package}-"}
           echo ::set-output name=prerelease::false
+          echo ::set-output name=raw::$tag
 
           if [[ ${#prerelease} -ne 0 ]]; then
             echo ::set-output name=prerelease::true
           fi
       - name: Create draft release
-        env:
-          tag: ${{ github.ref }}
-
         # TODO see about using Docker image instead of downloading at runtime
 
         # code adapted from <https://github.com/taiki-e/create-gh-release-action/blob/3d89f8d1ab8d63913861d1a4ec424395f1a60e67/main.sh#L84>
@@ -48,6 +45,7 @@ jobs:
           version="${{ steps.version.outputs.version }}"
           curl -LsSf "$PARSE_CHANGELOG_URL" | tar xzf -
           notes=$(./parse-changelog packages/${package}/CHANGELOG.md "$version")
+          tag="${{ steps.version.outputs.raw }}"
 
           if gh release view "${tag}" &>/dev/null; then
             gh release delete "${tag}" -y

@@ -1,6 +1,7 @@
 import type {
   Code,
   CompileContext,
+  Effects,
   Event,
   Extension,
   State,
@@ -8,7 +9,7 @@ import type {
 } from "micromark-util-types";
 import { codes } from "micromark-util-symbol/codes";
 import { types } from "micromark-util-symbol/types";
-import { markdownLineEnding } from "micromark-util-character";
+import { markdownLineEndingOrSpace } from "micromark-util-character";
 
 export interface IOptions {
   delimiter?: string | number;
@@ -41,114 +42,105 @@ export const html: Extension = {
 export const syntax = (options: IOptions = {}): Extension => {
   const delimiter = normalizeDelimiter(options.delimiter);
 
-  const tokenizeKeyboard: Tokenizer = function (effects, ok, nok): State {
-    let size = 0;
+  const makeTokenizer: (insideText: boolean) => Tokenizer = (insideText) =>
+    function (effects, ok, nok): State {
+      let size = 0;
 
-    return start;
+      return start;
 
-    function start(): void | State {
-      effects.enter(KEYBOARD_TYPE);
-      effects.enter(KEYBOARD_MARKER_TYPE);
-      return opening;
-    }
+      function start(): void | State {
+        if (insideText) {
+          effects.exit(KEYBOARD_TEXT_TYPE);
+        }
 
-    function opening(code: Code): void | State {
-      if (code !== delimiter && size < MINIMUM_MARKER_LENGTH) {
-        return nok(code);
-      }
-
-      if (code === delimiter) {
-        effects.consume(code);
-        size++;
+        effects.enter(KEYBOARD_TYPE);
+        effects.enter(KEYBOARD_MARKER_TYPE);
         return opening;
       }
 
-      effects.exit(KEYBOARD_MARKER_TYPE);
-      return gap;
-    }
+      function opening(code: Code): void | State {
+        if (code !== delimiter && size < MINIMUM_MARKER_LENGTH) {
+          return nok(code);
+        }
 
-    function gap(code: Code): void | State {
-      if (code === codes.eof) {
-        return nok(code);
+        if (code === delimiter) {
+          effects.consume(code);
+          size++;
+          return opening;
+        }
+
+        effects.exit(KEYBOARD_MARKER_TYPE);
+        return openingGap;
       }
 
-      if (code === delimiter) {
-        // first try closing, then try parsing nested sequence, then
-        // just treat it as a literal
-        return effects.attempt(
-          {
-            tokenize: makeClosingTokenizer(delimiter, size),
-            partial: true,
-          },
-          ok,
-          () => {
-            return effects.attempt(
-              {
-                tokenize: tokenizeKeyboard,
-                partial: true,
-              },
-              gap,
-              (code) => {
-                consumeLiteral(code);
-                return gap;
-              },
-            );
-          },
-        );
+      function openingGap(code: Code): void | State {
+        if (isEof(code)) {
+          return nok;
+        }
+
+        if (tryWhitespace(code, effects)) {
+          return openingGap;
+        }
+
+        return startData;
       }
 
-      if (code === codes.space) {
-        effects.enter(SPACE_TYPE);
-        effects.consume(code);
-        effects.exit(SPACE_TYPE);
-        return gap;
-      }
-
-      if (markdownLineEnding(code)) {
-        effects.enter(types.lineEnding);
-        effects.consume(code);
-        effects.exit(types.lineEnding);
-        return gap;
-      }
-
-      effects.enter(KEYBOARD_TEXT_TYPE);
-      return data(code);
-    }
-
-    function data(code: Code): void | State {
-      if (
-        code === codes.eof ||
-        code === codes.space ||
-        code === delimiter ||
-        markdownLineEnding(code)
-      ) {
-        effects.exit(KEYBOARD_TEXT_TYPE);
-        return gap(code);
-      }
-
-      if (code === codes.backslash) {
-        effects.exit(KEYBOARD_TEXT_TYPE);
-        effects.consume(code);
+      function startData(_code: Code): void | State {
         effects.enter(KEYBOARD_TEXT_TYPE);
-        return (code) => {
-          consumeLiteral(code);
-          return data;
-        };
+        return data;
       }
 
-      effects.consume(code);
-      return data;
-    }
+      function data(code: Code): void | State {
+        const t = makeClosingTokenizer(delimiter, size, true, insideText);
 
-    function consumeLiteral(code: Code): void | State {
-      effects.enter(KEYBOARD_TEXT_ESCAPE_TYPE);
-      effects.consume(code);
-      effects.exit(KEYBOARD_TEXT_ESCAPE_TYPE);
-    }
-  };
+        if (isEof(code)) {
+          effects.exit(KEYBOARD_TEXT_TYPE);
+          effects.enter(KEYBOARD_MARKER_TYPE);
+          effects.exit(KEYBOARD_MARKER_TYPE);
+          return nok(code);
+        }
+
+        if (markdownLineEndingOrSpace(code) || code === delimiter) {
+          return effects.attempt(
+            {
+              tokenize: t,
+              partial: true,
+            },
+            ok,
+            code === delimiter
+              ? () =>
+                  effects.attempt(
+                    {
+                      tokenize: makeTokenizer(true),
+                      partial: true,
+                    },
+                    data,
+                    nok,
+                  )
+              : literal,
+          );
+        }
+
+        return literal;
+      }
+
+      function literal(code: Code): void | State {
+        if (code === codes.backslash) {
+          effects.exit(KEYBOARD_TEXT_TYPE);
+          effects.enter(KEYBOARD_TEXT_ESCAPE_TYPE);
+          effects.consume(code);
+          effects.exit(KEYBOARD_TEXT_ESCAPE_TYPE);
+          effects.enter(KEYBOARD_TEXT_TYPE);
+          return literal;
+        }
+
+        effects.consume(code);
+        return data;
+      }
+    };
 
   const tokenizer = {
-    tokenize: tokenizeKeyboard,
+    tokenize: makeTokenizer(false),
     resolveAll: (events: Event[]) => events,
   };
 
@@ -159,11 +151,31 @@ export const syntax = (options: IOptions = {}): Extension => {
   };
 };
 
-function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
+function makeClosingTokenizer(
+  delimiter: number,
+  size: number,
+  exitText: boolean,
+  enterText: boolean,
+): Tokenizer {
   return function (effects, ok, nok) {
     let current = 0;
+    const { events } = this;
 
     function start(): void | State {
+      if (exitText) {
+        effects.exit(KEYBOARD_TEXT_TYPE);
+      }
+
+      effects.enter(SPACE_TYPE);
+      return gap;
+    }
+
+    function gap(code: Code): State {
+      if (tryWhitespace(code, effects)) {
+        return gap;
+      }
+
+      effects.exit(SPACE_TYPE);
       effects.enter(KEYBOARD_MARKER_TYPE);
       return closing;
     }
@@ -174,8 +186,11 @@ function makeClosingTokenizer(delimiter: number, size: number): Tokenizer {
         current++;
 
         if (current === size) {
-          effects.exit(KEYBOARD_MARKER_TYPE);
-          effects.exit(KEYBOARD_TYPE);
+          effects.exit(KEYBOARD_MARKER_TYPE)._close = true;
+          effects.exit(KEYBOARD_TYPE)._close = true;
+          if (enterText) {
+            effects.enter(KEYBOARD_TEXT_TYPE);
+          }
           return ok(code);
         } else {
           return closing;
@@ -195,4 +210,26 @@ export function normalizeDelimiter(
   return typeof delimiter === "string"
     ? delimiter.charCodeAt(0)
     : delimiter || codes.verticalBar;
+}
+
+function isEof(code: Code): boolean {
+  return code === codes.eof;
+}
+
+function tryWhitespace(code: Code, effects: Effects): boolean {
+  if (code === codes.space) {
+    effects.enter(SPACE_TYPE);
+    effects.consume(code);
+    effects.exit(SPACE_TYPE);
+    return true;
+  }
+
+  if (markdownLineEndingOrSpace(code)) {
+    effects.enter(types.lineEnding);
+    effects.consume(code);
+    effects.exit(types.lineEnding);
+    return true;
+  }
+
+  return false;
 }

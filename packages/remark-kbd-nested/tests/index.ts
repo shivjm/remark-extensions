@@ -37,7 +37,7 @@ describe("transforming sequences should", () => {
       [
         "=",
         "1. Press === ==Ctrl== + ==Alt== + ==x== ===.\n2. Click on **Cancel**.",
-        "<ol>\n<li>Press <kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>x</kbd></kbd>.</li>\n<li>Click on <strong>Cancel</strong>.</li>\n</ol>",
+        "<ol>\n<li>Press <kbd><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>x</kbd></kbd>.</li>\n<li>Click on <strong>Cancel</strong>.</li>\n</ol>",
       ],
     ];
 

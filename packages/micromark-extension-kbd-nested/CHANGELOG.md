@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.4.0 (2021-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* **micromark-extension-kbd-nested:** update and improve README
+* **micromark-extension-kbd-nested:** add test suggested by README
+* **micromark-extension-kbd-nested:** add support for variable sequences
+
+### Features
+
+* **micromark-extension-kbd-nested:** add support for variable sequences ([d725d24](https://github.com/shivjm/remark-extensions/commit/d725d24190649dfe0e7cb8e656b4571482c3554d))
+
+
+### Tests
+
+* **micromark-extension-kbd-nested:** add test suggested by README ([cbac68b](https://github.com/shivjm/remark-extensions/commit/cbac68b9dd584715be36f793b7a660aa541b9c87))
+
+
+### docs
+
+* **micromark-extension-kbd-nested:** update and improve README ([362920b](https://github.com/shivjm/remark-extensions/commit/362920b09578598c945720c2bb9e24130fdf48fb))
+
 ## 0.3.1 (2021-11-02)
 
 

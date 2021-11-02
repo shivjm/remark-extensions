@@ -93,6 +93,13 @@ export const syntax = (options: IOptions = {}): Extension => {
       function data(code: Code): void | State {
         const t = makeClosingTokenizer(delimiter, size, true, insideText);
 
+        if (isEof(code)) {
+          effects.exit(KEYBOARD_TEXT_TYPE);
+          effects.enter(KEYBOARD_MARKER_TYPE);
+          effects.exit(KEYBOARD_MARKER_TYPE);
+          return nok(code);
+        }
+
         if (markdownLineEndingOrSpace(code) || code === delimiter) {
           return effects.attempt(
             {

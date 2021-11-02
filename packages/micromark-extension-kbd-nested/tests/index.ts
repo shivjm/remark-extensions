@@ -31,7 +31,7 @@ describe("works for simple cases", () => {
     ["||Ctrl||", "|", "<p><kbd>Ctrl</kbd></p>"],
     ["|| Ctrl ||", "|", "<p><kbd>Ctrl</kbd></p>"],
     ["|| npm run build ||", undefined, "<p><kbd>npm run build</kbd></p>"],
-    ["||a|| bc ||d", undefined, "<p><kbd>a</kbd> bc d</p>"], // remove orphans
+    ["||a|| bc ||d", undefined, "<p><kbd>a</kbd> bc ||d</p>"],
   ]);
 });
 

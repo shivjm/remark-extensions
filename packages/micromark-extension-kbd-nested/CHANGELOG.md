@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/shivjm/remark-extensions/compare/micromark-extension-kbd-nested-v0.3.0...micromark-extension-kbd-nested-v0.3.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* **micromark-extension-kbd-nested:** correctly handle escaped backslashes ([44c0515](https://github.com/shivjm/remark-extensions/commit/44c05153761e7d4af86b877f71e1f74952f3fb7b))
+
 ## [0.3.0](https://github.com/shivjm/remark-extensions/compare/micromark-extension-kbd-nested-v0.2.1...micromark-extension-kbd-nested-v0.3.0) (2021-11-02)
 
 

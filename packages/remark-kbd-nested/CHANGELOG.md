@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.3.0 (2021-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* **remark-kbd-nested:** add support for variable sections
+
+### Features
+
+* **remark-kbd-nested:** add support for variable sections ([7cdcb7c](https://github.com/shivjm/remark-extensions/commit/7cdcb7cd4b65ed0c6ca48a19ec1a8fb95f47a507))
+
 ## 0.2.1 (2021-11-02)
 
 

@@ -85,7 +85,7 @@ export const syntax = (options: IOptions = {}): Extension => {
         return startData;
       }
 
-      function startData(_code: Code): void | State {
+      function startData(): void | State {
         effects.enter(KEYBOARD_TEXT_TYPE);
         return data;
       }
@@ -163,7 +163,6 @@ function makeClosingTokenizer(
 ): Tokenizer {
   return function (effects, ok, nok) {
     let current = 0;
-    const { events } = this;
 
     function start(): void | State {
       if (exitText) {

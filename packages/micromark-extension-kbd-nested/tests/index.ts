@@ -48,6 +48,7 @@ describe("handles escaping", () => {
     ["|| \\| ||", undefined, "<p><kbd>|</kbd></p>"],
     ["|| \\| \\| || \\|", undefined, "<p><kbd>| |</kbd> |</p>"],
     ["|| \\  ||", undefined, "<p><kbd> </kbd></p>"],
+    ["|| \\\\  ||", undefined, "<p><kbd>\\</kbd></p>"],
     ["++ \\  ++", "+", "<p><kbd> </kbd></p>"],
   ]);
 });

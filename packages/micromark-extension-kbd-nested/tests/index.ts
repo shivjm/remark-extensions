@@ -101,6 +101,11 @@ describe("handles everything together", () => {
       "@",
       "<p><kbd><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd> </kbd></kbd></p>",
     ],
+    [
+      "Press ^^^ ^^Ctrl^^ + ^^ \\^ ^^ ^^^, then ^^ //key// ^^.",
+      "^",
+      "<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>^</kbd></kbd>, then <kbd><var>key</var></kbd>.</p>",
+    ],
   ]);
 });
 

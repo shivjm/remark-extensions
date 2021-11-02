@@ -6,7 +6,7 @@
 
 **[micromark][]** extension to support `kbd` element syntax with
 configurable delimiters, escaping, and arbitrary nesting (e.g.
-<kbd><kbd>Ctrl</kbd>+<kbd>x</kbd></kbd>). Based on
+<kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>). Based on
 [micromark-extension-kbd][].
 
 ## Install
@@ -40,19 +40,20 @@ console.log(output)
 Yields:
 
 ```html
-<p>Press <kbd><kbd>Ctrl</kbd> + <kbd> | </kbd></kbd>.</p>
+<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>|</kbd></kbd>.</p>
 ```
 
 ## Syntax
 
 Recognizes any sequence of two or more unescaped occurrences of the
 delimiter. All whitespace will be preserved except immediately after
-the opening sequence and immediately before the closing sequence.
-Nesting is possible by using a longer sequence on the outside and a
-shorter sequence on the inside, e.g. `||| ||Ctrl|| + ||x|| |||`. The
-sequence will be considered to end at the first whitespace character
-or non-delimiter, including escape characters. For example, these will
-all produce `<kbd>|</kbd>`:
+an opening sequence or immediately before a closing sequence. Nesting
+is possible by using a longer sequence on the outside and a shorter
+sequence on the inside, e.g. `||| ||Ctrl|| + ||x|| |||` will be turned
+into <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>. The sequence will be
+considered to end at the first whitespace character or non-delimiter,
+including escape characters. For example, these will all produce
+`<kbd>|</kbd>`:
 
 * `||\|||`
 * `|| | ||`

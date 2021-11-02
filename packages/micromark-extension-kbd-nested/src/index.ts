@@ -131,9 +131,13 @@ export const syntax = (options: IOptions = {}): Extension => {
           effects.consume(code);
           effects.exit(KEYBOARD_TEXT_ESCAPE_TYPE);
           effects.enter(KEYBOARD_TEXT_TYPE);
-          return literal;
+          return onlyLiteral;
         }
 
+        return onlyLiteral;
+      }
+
+      function onlyLiteral(code: Code): void | State {
         effects.consume(code);
         return data;
       }

@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/shivjm/remark-extensions/compare/micromark-extension-kbd-nested-v0.2.1...micromark-extension-kbd-nested-v0.3.0) (2021-11-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **micromark-extension-kbd-nested:** turn unclosed sequences into no-ops
+* **micromark-extension-kbd-nested:** preserve space inside `kbd` sequence
+
+### Features
+
+* **micromark-extension-kbd-nested:** turn unclosed sequences into no-ops ([be61d7f](https://github.com/shivjm/remark-extensions/commit/be61d7f36f664adb025f7a1793d7ee87a589950f))
+
+
+### Bug Fixes
+
+* **micromark-extension-kbd-nested:** preserve space inside `kbd` sequence ([9a6a0eb](https://github.com/shivjm/remark-extensions/commit/9a6a0eb6f654ba469891d20d192df327e86340be))
+
 ### [0.2.1](https://github.com/shivjm/remark-extensions/compare/micromark-extension-kbd-nested-v0.2.0...micromark-extension-kbd-nested-v0.2.1) (2021-11-01)
 
 

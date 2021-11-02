@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "micromark-util-character": "^1.1.0",
-    "micromark-util-chunked": "^1.0.0",
     "micromark-util-symbol": "^1.0.0"
   },
   "devDependencies": {

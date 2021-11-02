@@ -18,7 +18,6 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       micromark: ^3.0.7
       micromark-util-character: ^1.1.0
-      micromark-util-chunked: ^1.0.0
       micromark-util-resolve-all: ^1.0.0
       micromark-util-symbol: ^1.0.0
       micromark-util-types: ^1.0.1
@@ -30,7 +29,6 @@ importers:
       typescript: ^4.4.4
     dependencies:
       micromark-util-character: 1.1.0
-      micromark-util-chunked: 1.0.0
       micromark-util-symbol: 1.0.0
     devDependencies:
       '@types/chai': 4.2.22
@@ -1888,6 +1886,7 @@ packages:
     resolution: {integrity: sha512-5e8xTis5tEZKgesfbQMKRCyzvffRRUX+lK/y+DvsMFdabAicPkkZV6gO+FEWi9RfuKKoxxPwNL+dFF0SMImc1g==}
     dependencies:
       micromark-util-symbol: 1.0.0
+    dev: true
 
   /micromark-util-classify-character/1.0.0:
     resolution: {integrity: sha512-F8oW2KKrQRb3vS5ud5HIqBVkCqQi224Nm55o5wYLzY/9PwHGXC01tr3d7+TqHHz6zrKQ72Okwtvm/xQm6OVNZA==}

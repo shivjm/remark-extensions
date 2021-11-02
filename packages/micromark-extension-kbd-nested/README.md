@@ -5,9 +5,8 @@
 [![Size][size-badge]][size]
 
 **[micromark][]** extension to support `kbd` element syntax with
-configurable delimiters, escaping, and arbitrary nesting (e.g.
-<kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>). Based on
-[micromark-extension-kbd][].
+configurable delimiters, escaping, `var` sequences, and arbitrary
+nesting (e.g. <kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).
 
 ## Install
 
@@ -29,7 +28,7 @@ import {
   syntax
 } from 'micromark-extension-kbd-nested';
 
-const output = micromark('Press ||| ||Ctrl|| + || \| || |||.', {
+const output = micromark('Press ||| ||Ctrl|| + || \| || |||, then || //key// ||.', {
   extensions: [syntax()],
   htmlExtensions: [html]
 })
@@ -40,26 +39,37 @@ console.log(output)
 Yields:
 
 ```html
-<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>|</kbd></kbd>.</p>
+<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>|</kbd></kbd>, then <kbd><var>key</var></kbd>.</p>
 ```
 
 ## Syntax
 
-Recognizes any sequence of two or more unescaped occurrences of the
-delimiter. All whitespace will be preserved except immediately after
-an opening sequence or immediately before a closing sequence. Nesting
-is possible by using a longer sequence on the outside and a shorter
-sequence on the inside, e.g. `||| ||Ctrl|| + ||x|| |||` will be turned
-into <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>. The sequence will be
-considered to end at the first whitespace character or non-delimiter,
-including escape characters. For example, these will all produce
-`<kbd>|</kbd>`:
+### Keyboard sequences
+Recognizes any sequence of two or more unescaped occurrences of
+`delimiter` (defaults to `|`) as a keyboard sequence.
+  
+* All is preserved except immediately after an opening sequence or
+  immediately before a closing sequence.
+* Nesting is possible by using a longer sequence on the outside and a
+  shorter sequence on the inside, e.g. `||| ||Ctrl|| + ||x|| |||` will
+  be turned into <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>.
+* The opening sequence will be considered to end at the first
+  whitespace character or non-delimiter, including escape characters.
+  For example, these will all produce `<kbd>|</kbd>`:
+  * `||\|||`
+  * `|| | ||`
+  * `||        | ||`
+  * `++|++` (with a delimiter of `+`)
+  * `++ | ++` (with a delimiter of `+`)
+  
+### Variable sequence
+`variableDelimiter` (defaults to `/`) can be used *within* keyboard
+sequences to mark variable sections.
 
-* `||\|||`
-* `|| | ||`
-* `||        | ||`
-* `++|++` (with a delimiter of `+`)
-* `++ | ++` (with a delimiter of `+`)
+* Must always use two variable delimiters.
+* Cannot be nested.
+* All is preserved except immediately after an opening sequence or
+  immediately before a closing sequence.
 
 ## API
 
@@ -68,22 +78,24 @@ There is no default export.
 
 ### `html`
 
-Extension for micromark to compile as `<kbd>` elements (can be passed
-in `htmlExtensions`).
+Extension for micromark to compile as `<kbd>` and `<var>` elements
+(can be passed in `htmlExtensions`).
 
 ### `syntax(options?)`
 
-Returns an extension for micromark to parse `kbd` elements (can be
-passed in `extensions`).
+Returns an extension for micromark to parse keyboard sequences
+optionally containing variable sequences (can be passed in
+`extensions`).
 
-Setting a delimiter that already has a special meaning will result in
-undefined behaviour.
+Do not pass characters that are already being processed specially as
+the delimiters.
 
 #### `options`
 
 | Name | Description | Default |
 |------|-------------|---------|
 | `delimiter` | Character to use as delimiter | `|` |
+| `variableDelimiter` | Character to use as variable delimiter | `/` |
 
 [ISC][license] © [Shiv Jha Mathur][author]
 

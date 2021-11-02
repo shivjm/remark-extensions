@@ -5,16 +5,18 @@ import { html, syntax } from "../src/index.js";
 
 import { micromark } from "micromark";
 
-type Cases = readonly [string, string | undefined, string][];
+type Cases =
+  | readonly [string, string | undefined, string][]
+  | readonly [string, string | undefined, string, string | undefined][];
 
 function runCases(cases: Cases) {
-  for (const [input, delimiter, expected] of cases) {
+  for (const [input, delimiter, expected, variableDelimiter] of cases) {
     it(`delimiter: ${JSON.stringify(delimiter)}, input: ${JSON.stringify(
       input,
     )}`, () => {
       assert.equal(
         micromark(input, {
-          extensions: [syntax({ delimiter })],
+          extensions: [syntax({ delimiter, variableDelimiter })],
           htmlExtensions: [html],
         }),
         expected,
@@ -68,6 +70,25 @@ describe("handles nesting", () => {
   ]);
 });
 
+describe("handles variable sections", () => {
+  runCases([
+    ["||//k//||", undefined, "<p><kbd><var>k</var></kbd></p>", undefined],
+    [
+      "||| ||Ctrl|| + ||// key //|| |||",
+      undefined,
+      "<p><kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd></p>",
+      undefined,
+    ],
+    ["++||k||   ++", "+", "<p><kbd><var>k</var></kbd></p>", "|"],
+    [
+      "!!! !!Ctrl!! + !!   __key   __!! !!!",
+      "!",
+      "<p><kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd></p>",
+      "_",
+    ],
+  ]);
+});
+
 describe("handles everything together", () => {
   runCases([
     [
@@ -79,6 +100,11 @@ describe("handles everything together", () => {
       "@@@@@ @@Ctrl@@ + @@@@ Alt @@@@ + @@@ \\ @@@ @@@@@",
       "@",
       "<p><kbd><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd> </kbd></kbd></p>",
+    ],
+    [
+      "Press ^^^ ^^Ctrl^^ + ^^ \\^ ^^ ^^^, then ^^ //key// ^^.",
+      "^",
+      "<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>^</kbd></kbd>, then <kbd><var>key</var></kbd>.</p>",
     ],
   ]);
 });

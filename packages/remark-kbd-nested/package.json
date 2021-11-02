@@ -1,6 +1,6 @@
 {
   "name": "remark-kbd-nested",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "remark plugin to add support for `kbd` element syntax with configurable delimiters, escaping, and arbitrary nesting",
   "main": "index.ts",
   "scripts": {
@@ -58,6 +58,6 @@
     "unified": "^10.1.0"
   },
   "dependencies": {
-    "micromark-extension-kbd-nested": "workspace:^0.3.1"
+    "micromark-extension-kbd-nested": "workspace:^0.4.0"
   }
 }

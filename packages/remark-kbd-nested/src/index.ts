@@ -18,9 +18,24 @@ const fromMarkdown: FromMarkdownExtension = {
         token,
       );
     },
+    keyboardSequenceVariable: function (token) {
+      this.enter(
+        {
+          /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-explicit-any */
+          type: "variable" as any,
+          data: { hName: "var" },
+          attributes: {},
+          children: [],
+        },
+        token,
+      );
+    },
   },
   exit: {
     keyboardSequence: function (token) {
+      this.exit(token);
+    },
+    keyboardSequenceVariable: function (token) {
       this.exit(token);
     },
   },

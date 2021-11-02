@@ -8,5 +8,13 @@
     "lint": "pnpm lint -r",
     "build": "pnpm build -r --parallel",
     "test": "pnpm test -r"
+  },
+  "pnpm": {
+    "overrides": {
+      "conventional-changelog-conventionalcommits": "npm:@shivjm/conventional-changelog-conventionalcommits@4.6.1"
+    }
+  },
+  "devDependencies": {
+    "standard-version": "^9.3.2"
   }
 }

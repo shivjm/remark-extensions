@@ -1,3 +1,49 @@
+/**
+ * [micromark](https://github.com/micromark/micromark) extension to
+ * support `kbd` element syntax with configurable delimiters,
+ * escaping, `var` sequences, and arbitrary nesting (e.g.
+ * <kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).
+ *
+ * **Warning**: Do not set delimiters to characters that already being
+ * processed specially. This will result in undefined behaviour.
+ *
+ * ## Syntax
+ *
+ * ### Keyboard sequences
+ *
+ * Recognizes any sequence of two or more unescaped occurrences of
+ * {@link IOptions.delimiter | delimiter} (defaults to `|`) as a
+ * keyboard sequence.
+ *
+ * * All whitespace is preserved except immediately after an opening
+ *   sequence or immediately before a closing sequence.
+ * * Nesting is possible using a longer sequence on the outside and a
+ *   shorter sequence on the inside. For example, `||| ||Ctrl|| + ||x||
+ *   |||` will yield <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>.
+ * * The opening sequence will be considered to end at the first
+ *   whitespace character or non-delimiter, including escape characters.
+ *   For example, these will all produce `<kbd>|</kbd>`:
+ *   * `||\|||`
+ *   * `|| | ||`
+ *   * `||        | ||`
+ *   * `++|++` (with a delimiter of `+`)
+ *   * `++ | ++` (with a delimiter of `+`)
+ *
+ * ### Variable sequence
+ *
+ * Recognizes sequences of two occurrences of {@link
+ * IOptions.variableDelimiter | delimiter} (defaults to `/`) *within*
+ * keyboard sequences as mark variable sections.
+ *
+ * * Must always use two variable delimiters. Further occurrences will be
+ *   interpreted as the closing sequence.
+ * * Cannot be nested.
+ * * All whitespace is preserved except immediately after an opening
+ *   sequence or immediately before a closing sequence.
+ *
+ * @module
+ */
+
 import type {
   Code,
   CompileContext,
@@ -11,8 +57,12 @@ import { codes } from "micromark-util-symbol/codes";
 import { types } from "micromark-util-symbol/types";
 import { markdownLineEndingOrSpace } from "micromark-util-character";
 
+/** Options that can be passed to the extension. */
 export interface IOptions {
+  /** Character code or character to use as a delimiter for keyboard sequences. Defaults to `|`. */
   delimiter?: string | number;
+
+  /** Character code or character to use as a delimiter for variable sequences within keyboard sequences. Defaults to `/`. */
   variableDelimiter?: string | number;
 }
 
@@ -30,6 +80,10 @@ const SPACE_TYPE = "space";
 const DEFAULT_DELIMITER = codes.verticalBar;
 const DEFAULT_VARIABLE_DELIMITER = codes.slash;
 
+/**
+ * Extension for micromark to compile keyboard sequences as `<kbd>`
+ * elements and variable sequences as `<var>` elements. Can be passed
+ * in `htmlExtensions.` */
 export const html: Extension = {
   enter: {
     [KEYBOARD_TYPE]: function (this: CompileContext): void {
@@ -48,8 +102,15 @@ export const html: Extension = {
     },
   },
 };
-/* eslint-enable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call */
 
+/**
+ * Returns an extension for micromark to parse keyboard sequences
+ * optionally containing variable sequences. Can be passed in
+ * `extensions`.
+ *
+ * @param options
+ * @returns Extension to parse keyboard sequences.
+ */
 // adapted from <https://github.com/micromark/micromark/blob/1b378e72675b15caff021f957a824d1f01420774/packages/micromark-core-commonmark/dev/lib/code-text.js>
 export const syntax = (options: IOptions = {}): Extension => {
   const delimiter = normalizeDelimiter(options.delimiter, DEFAULT_DELIMITER);
@@ -62,7 +123,7 @@ export const syntax = (options: IOptions = {}): Extension => {
     function (effects, ok, nok): State {
       let size = 0;
 
-      const onlyLiteral = makeConsumeLiteral(effects, data);
+      const onlyLiteral = makeConsumeOne(effects, data);
       const literal = makeLiteral(
         effects,
         onlyLiteral,
@@ -178,6 +239,16 @@ export const syntax = (options: IOptions = {}): Extension => {
   };
 };
 
+/**
+ * Returns a {@link Tokenizer} that consumes the end of a keyboard
+ * sequence with the given delimiters repeated `size` times,
+ * optionally preceded by whitespace.
+ *
+ * @param delimiter The character code of the delimiter.
+ * @param size Number of delimiters to expect.
+ * @param exitText Whether to exit {@link KEYBOARD_TEXT_TYPE} before starting.
+ * @param enterText Whether to enter {@link KEYBOARD_TEXT_TYPE} after ending.
+ */
 function makeClosingTokenizer(
   delimiter: number,
   size: number,
@@ -230,9 +301,13 @@ function makeClosingTokenizer(
   };
 }
 
+/**
+ * Returns a {@link Tokenizer} that consumes a variable sequence marked by `delimiter`.
+ * @param delimiter The character code of the delimiter.
+ */
 function makeVariableTokenizer(delimiter: number): Tokenizer {
   return function (effects, ok, nok) {
-    const onlyLiteral = makeConsumeLiteral(effects, data);
+    const onlyLiteral = makeConsumeOne(effects, data);
     const literal = makeLiteral(
       effects,
       onlyLiteral,
@@ -294,6 +369,12 @@ function makeVariableTokenizer(delimiter: number): Tokenizer {
   };
 }
 
+/**
+ * Returns a {@link Tokenizer} that consumes the end of a variable
+ * sequence, optionally preceded by whitespace.
+ *
+ * @param delimiter The character code of the delimiter.
+ */
 function makeVariableClosingTokenizer(delimiter: number): Tokenizer {
   return function (effects, ok, nok) {
     let size = 0;
@@ -336,6 +417,13 @@ function makeVariableClosingTokenizer(delimiter: number): Tokenizer {
   };
 }
 
+/**
+ * Converts the optional `delimiter` into a character code. Returns
+ * `defaultValue` if no delimiter is provided.
+ *
+ * @param delimiter The optional character code or character.
+ * @param defaultValue The character code to return if no delimiter is provided.
+ */
 export function normalizeDelimiter(
   delimiter: string | number | undefined,
   defaultValue: number,
@@ -345,6 +433,9 @@ export function normalizeDelimiter(
     : delimiter || defaultValue;
 }
 
+/**
+ * Detects whether the given code marks EOF.
+ */
 function isEof(code: Code): boolean {
   return code === codes.eof;
 }
@@ -367,16 +458,28 @@ function tryWhitespace(code: Code, effects: Effects): boolean {
   return false;
 }
 
-function makeConsumeLiteral(
-  effects: Effects,
-  next: State,
-): (code: Code) => State {
+/**
+ * Returns a {@link State} that consumes a single character.
+ * @param effects
+ * @param next The state to enter after the character is consumed.
+ */
+function makeConsumeOne(effects: Effects, next: State): (code: Code) => State {
   return (code: Code) => {
     effects.consume(code);
     return next;
   };
 }
 
+/**
+ * Returns a {@link State} that optionally consumes a single backslash
+ * as `escapeType`.
+ *
+ * @param effects
+ * @param next The next state to enter.
+ * @param outerType The type to exit before and enter after consuming an escape.
+ * @param escapeType The type to consume an escape as.
+ * @returns
+ */
 function makeLiteral(
   effects: Effects,
   next: State,

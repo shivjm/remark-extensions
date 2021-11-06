@@ -84,7 +84,7 @@ const DEFAULT_VARIABLE_DELIMITER = codes.slash;
  * Extension for micromark to compile keyboard sequences as `<kbd>`
  * elements and variable sequences as `<var>` elements. Can be passed
  * in `htmlExtensions.` */
-export const html: Extension = {
+export const html: Extension = Object.freeze({
   enter: {
     [KEYBOARD_TYPE]: function (this: CompileContext): void {
       this.tag("<kbd>");
@@ -101,7 +101,7 @@ export const html: Extension = {
       this.tag("</var>");
     },
   },
-};
+});
 
 /**
  * Returns an extension for micromark to parse keyboard sequences

@@ -3,7 +3,7 @@ import type { Plugin } from "unified";
 import type { Root } from "mdast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
 
-const fromMarkdown: FromMarkdownExtension = {
+const fromMarkdown: FromMarkdownExtension = Object.freeze({
   canContainEols: ["keyboard"],
   enter: {
     keyboardSequence: function (token) {
@@ -39,7 +39,7 @@ const fromMarkdown: FromMarkdownExtension = {
       this.exit(token);
     },
   },
-};
+});
 
 export const remarkKbdNested: Plugin<IOptions[], Root> = function (
   options: IOptions = {},

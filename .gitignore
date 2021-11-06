@@ -6,3 +6,5 @@
 /packages/*/node_modules/
 
 .pnpm-debug.log
+/docs/
+packages/*/docs/

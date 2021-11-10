@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.5.0 (2021-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* **micromark-extension-kbd-nested:** freeze `html`
+
+### Bug Fixes
+
+* **micromark-extension-kbd-nested:** freeze `html` ([e54a3c2](https://github.com/shivjm/remark-extensions/commit/e54a3c2539d982cf40a7860ca52fb302d018a9d6))
+
 ## 0.4.0 (2021-11-02)
 
 ### ⚠ BREAKING CHANGES

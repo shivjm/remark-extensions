@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.4.0 (2021-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* **remark-kbd-nested:** freeze `fromMarkdown`
+
+### Bug Fixes
+
+* **remark-kbd-nested:** correct path to `main` in package.json ([70353f4](https://github.com/shivjm/remark-extensions/commit/70353f415d4589b8e67d13616207b3cd64566a27))
+* **remark-kbd-nested:** freeze `fromMarkdown` ([ac775c2](https://github.com/shivjm/remark-extensions/commit/ac775c2f8c24b5396ba2a408bcb56218efae3967))
+
 ## 0.3.0 (2021-11-02)
 
 ### ⚠ BREAKING CHANGES

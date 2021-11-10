@@ -42,3 +42,16 @@ jobs:
           pnpm install --frozen-lockfile --filter "$package..."
           pnpm run build --filter "$package"
           pnpm publish --no-git-checks --filter "$package"
+      - name: Generate docs for all packages
+        # TODO this means updating all docs for all changes, not just
+        # the current module, regardless of release status
+        run: |
+          pnpm typedoc
+      - name: Deploy docs for all packages to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

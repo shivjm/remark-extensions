@@ -1,4 +1,5 @@
 {
+  "name": "remark-extensions",
   "engines": {
     "node": ">=10",
     "pnpm": ">=3"
@@ -7,7 +8,8 @@
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm lint -r",
     "build": "pnpm build -r --parallel",
-    "test": "pnpm test -r"
+    "test": "pnpm test -r",
+    "typedoc": "typedoc --entryPointStrategy packages --options typedoc.json packages/*"
   },
   "pnpm": {
     "overrides": {
@@ -15,6 +17,7 @@
     }
   },
   "devDependencies": {
-    "standard-version": "^9.3.2"
+    "standard-version": "^9.3.2",
+    "typedoc": "^0.22.7"
   }
 }

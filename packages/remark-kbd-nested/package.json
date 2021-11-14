@@ -1,6 +1,6 @@
 {
   "name": "remark-kbd-nested",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "remark plugin to add support for `kbd` element syntax with configurable delimiters, escaping, and arbitrary nesting",
   "main": "src/index.ts",
   "scripts": {

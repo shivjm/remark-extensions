@@ -97,15 +97,17 @@ the delimiters.
 | `delimiter` | Character to use as delimiter | `|` |
 | `variableDelimiter` | Character to use as variable delimiter | `/` |
 
+## License
+
 [ISC][license] © [Shiv Jha Mathur][author]
 
 <!-- Definitions -->
 
 [author]: https://github.com/shivjm
 
-[test-badge]: https://github.com/shivjm/micromark-extension-kbd-nested/actions/workflows/test.yml/badge.svg
+[test-badge]: https://github.com/shivjm/remark-extensions/actions/workflows/test.yml/badge.svg
 
-[build]: https://github.com/shivjm/micromark-extension-kbd-nested/actions
+[build]: https://github.com/shivjm/remark-extensions/actions
 
 [downloads-badge]: https://img.shields.io/npm/dm/micromark-extension-kbd-nested.svg
 
@@ -117,11 +119,9 @@ the delimiters.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[license]: license
+[license]: ../../license
 
 [micromark]: https://github.com/micromark/micromark
-
-[micromark-extension-kbd]: https://github.com/zestedesavoir/zmarkdown/tree/next/packages/micromark-extension-kbd
 
 [from-markdown]: https://github.com/syntax-tree/mdast-util-from-markdown
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html><html class="default no-js"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>micromark-extension-kbd-nested | remark-extensions</title><meta name="description" content="Documentation for remark-extensions"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base=".."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">remark-extensions</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><ul class="tsd-breadcrumb"><li><a href="../modules.html">remark-extensions</a></li><li><a href="micromark_extension_kbd_nested.html">micromark-extension-kbd-nested</a></li></ul><h1>Module micromark-extension-kbd-nested</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><div class="lead">
+<p><a href="https://github.com/micromark/micromark">micromark</a> extension to
+support <code>kbd</code> element syntax with configurable delimiters,
+escaping, <code>var</code> sequences, and arbitrary nesting (e.g.
+<kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).</p>
+</div><div><p><strong>Warning</strong>: Do not set delimiters to characters that already being
+processed specially. This will result in undefined behaviour.</p>
+
+<a href="#syntax" id="syntax" style="color: inherit; text-decoration: none;">
+  <h2>Syntax</h2>
+</a>
+
+<a href="#keyboard-sequences" id="keyboard-sequences" style="color: inherit; text-decoration: none;">
+  <h3>Keyboard sequences</h3>
+</a>
+<p>Recognizes any sequence of two or more unescaped occurrences of
+<a href="../interfaces/micromark_extension_kbd_nested.IOptions.html#delimiter">delimiter</a> (defaults to <code>|</code>) as a
+keyboard sequence.</p>
+<ul>
+<li>All whitespace is preserved except immediately after an opening
+sequence or immediately before a closing sequence.</li>
+<li>Nesting is possible using a longer sequence on the outside and a
+shorter sequence on the inside. For example, <code>||| ||Ctrl|| + ||x|| |||</code> will yield <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>.</li>
+<li>The opening sequence will be considered to end at the first
+whitespace character or non-delimiter, including escape characters.
+For example, these will all produce <code>&lt;kbd&gt;|&lt;/kbd&gt;</code>:<ul>
+<li><code>||\|||</code></li>
+<li><code>|| | ||</code></li>
+<li><code>||        | ||</code></li>
+<li><code>++|++</code> (with a delimiter of <code>+</code>)</li>
+<li><code>++ | ++</code> (with a delimiter of <code>+</code>)</li>
+</ul>
+</li>
+</ul>
+
+<a href="#variable-sequence" id="variable-sequence" style="color: inherit; text-decoration: none;">
+  <h3>Variable sequence</h3>
+</a>
+<p>Recognizes sequences of two occurrences of <a href="../interfaces/micromark_extension_kbd_nested.IOptions.html#variableDelimiter">delimiter</a> (defaults to <code>/</code>) <em>within</em>
+keyboard sequences as mark variable sections.</p>
+<ul>
+<li>Must always use two variable delimiters. Further occurrences will be
+interpreted as the closing sequence.</li>
+<li>Cannot be nested.</li>
+<li>All whitespace is preserved except immediately after an opening
+sequence or immediately before a closing sequence.</li>
+</ul>
+</div></div></section><section class="tsd-panel-group tsd-index-group"><h2>Index</h2><section class="tsd-panel tsd-index-panel"><div class="tsd-index-content"><section class="tsd-index-section "><h3>Interfaces</h3><ul class="tsd-index-list"><li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/micromark_extension_kbd_nested.IOptions.html" class="tsd-kind-icon">IOptions</a></li></ul></section><section class="tsd-index-section "><h3>Variables</h3><ul class="tsd-index-list"><li class="tsd-kind-variable tsd-parent-kind-module"><a href="micromark_extension_kbd_nested.html#html" class="tsd-kind-icon">html</a></li></ul></section><section class="tsd-index-section "><h3>Functions</h3><ul class="tsd-index-list"><li class="tsd-kind-function tsd-parent-kind-module"><a href="micromark_extension_kbd_nested.html#normalizeDelimiter" class="tsd-kind-icon">normalize<wbr/>Delimiter</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="micromark_extension_kbd_nested.html#syntax" class="tsd-kind-icon">syntax</a></li></ul></section></div></section></section><section class="tsd-panel-group tsd-member-group "><h2>Variables</h2><section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module"><a id="html" class="tsd-anchor"></a><h3>html</h3><div class="tsd-signature tsd-kind-icon">html<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Extension</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/shivjm/remark-extensions/blob/5c443db/packages/micromark-extension-kbd-nested/src/index.ts#L87">micromark-extension-kbd-nested/src/index.ts:87</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Extension for micromark to compile keyboard sequences as <code>&lt;kbd&gt;</code>
+elements and variable sequences as <code>&lt;var&gt;</code> elements. Can be passed
+in <code>htmlExtensions.</code></p>
+</div></div></section></section><section class="tsd-panel-group tsd-member-group "><h2>Functions</h2><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="normalizeDelimiter" class="tsd-anchor"></a><h3>normalize<wbr/>Delimiter</h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">normalize<wbr/>Delimiter<span class="tsd-signature-symbol">(</span>delimiter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, defaultValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/shivjm/remark-extensions/blob/5c443db/packages/micromark-extension-kbd-nested/src/index.ts#L427">micromark-extension-kbd-nested/src/index.ts:427</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Converts the optional <code>delimiter</code> into a character code. Returns
+<code>defaultValue</code> if no delimiter is provided.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>delimiter: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The optional character code or character.</p>
+</div></div></li><li><h5>defaultValue: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The character code to return if no delimiter is provided.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="syntax" class="tsd-anchor"></a><h3><span class="tsd-flag ts-flagConst">Const</span> syntax</h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">syntax<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/micromark_extension_kbd_nested.IOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">IOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Extension</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/shivjm/remark-extensions/blob/5c443db/packages/micromark-extension-kbd-nested/src/index.ts#L115">micromark-extension-kbd-nested/src/index.ts:115</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Returns an extension for micromark to parse keyboard sequences
+optionally containing variable sequences. Can be passed in
+<code>extensions</code>.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>options: <a href="../interfaces/micromark_extension_kbd_nested.IOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">IOptions</a><span class="tsd-signature-symbol"> = {}</span></h5></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Extension</span></h4><div><p>Extension to parse keyboard sequences.</p>
+</div></li></ul></section></section></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class=""><a href="../modules.html">Modules</a></li><li class="current tsd-kind-module"><a href="micromark_extension_kbd_nested.html">micromark-<wbr/>extension-<wbr/>kbd-<wbr/>nested</a></li><li class=" tsd-kind-module"><a href="remark_kbd_nested.html">remark-<wbr/>kbd-<wbr/>nested</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/micromark_extension_kbd_nested.IOptions.html" class="tsd-kind-icon">IOptions</a></li><li class="tsd-kind-variable tsd-parent-kind-module"><a href="micromark_extension_kbd_nested.html#html" class="tsd-kind-icon">html</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="micromark_extension_kbd_nested.html#normalizeDelimiter" class="tsd-kind-icon">normalize<wbr/>Delimiter</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="micromark_extension_kbd_nested.html#syntax" class="tsd-kind-icon">syntax</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="../assets/main.js"></script></body></html>

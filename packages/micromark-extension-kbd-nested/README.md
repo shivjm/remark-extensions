@@ -97,6 +97,8 @@ the delimiters.
 | `delimiter` | Character to use as delimiter | `|` |
 | `variableDelimiter` | Character to use as variable delimiter | `/` |
 
+## License
+
 [ISC][license] © [Shiv Jha Mathur][author]
 
 <!-- Definitions -->

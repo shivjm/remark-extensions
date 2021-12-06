@@ -67,6 +67,7 @@ export interface IOptions {
 }
 
 const MINIMUM_MARKER_LENGTH = 2;
+const VARIABLE_MARKER_LENGTH = 2;
 
 const KEYBOARD_TYPE = "keyboardSequence";
 const KEYBOARD_TEXT_TYPE = types.codeTextData; // TODO check whether this is okay
@@ -335,7 +336,7 @@ function makeVariableTokenizer(delimiter: number): Tokenizer {
       size++;
       effects.consume(delimiter);
 
-      if (size === MINIMUM_MARKER_LENGTH) {
+      if (size === VARIABLE_MARKER_LENGTH) {
         effects.exit(KEYBOARD_VARIABLE_MARKER_TYPE);
         return gap;
       }
@@ -400,7 +401,7 @@ function makeVariableClosingTokenizer(delimiter: number): Tokenizer {
       if (code === delimiter) {
         effects.consume(code);
         size++;
-        if (size === MINIMUM_MARKER_LENGTH) {
+        if (size === VARIABLE_MARKER_LENGTH) {
           effects.exit(KEYBOARD_VARIABLE_MARKER_TYPE);
           effects.exit(KEYBOARD_VARIABLE_TYPE);
 

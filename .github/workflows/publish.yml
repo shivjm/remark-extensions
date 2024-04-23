@@ -22,6 +22,10 @@ jobs:
         with:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
+      - name: Register package name
+        run: |
+          PACKAGE_NAME=`echo "${{ github.event.release.name }}" | cut -d ' ' -f 1`
+          echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
       - name: Publish single module
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,22 +36,27 @@ jobs:
         # it at runtime.
 
         run: |
-          package=`echo "${{ github.event.release.name }}" | cut -d ' ' -f 1`
-
           echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 
-          cd packages/$package
-          pnpm install --frozen-lockfile --filter "$package..."
-          pnpm run -r build --filter "$package"
-          pnpm publish --no-git-checks --filter "$package"
-      - name: Generate docs for all packages
-        # TODO this means updating all docs for all changes, not just
-        # the current module, regardless of release status; see
-        # TypeStrong/typedoc#1791
+          cd packages/$PACKAGE_NAME
+          pnpm install --frozen-lockfile --filter "$PACKAGE_NAME..."
+          pnpm run -r build --filter "$PACKAGE_NAME"
+          pnpm publish --no-git-checks --filter "$PACKAGE_NAME"
+      - name: Check out just docs
+        uses: actions/checkout@v4
+        with:
+          ref: "gh-pages"
+          sparse-checkout: "docs-json"
+      - name: Update documentation
         run: |
           pnpm install -r --frozen-lockfile
-          pnpm run -r typedoc
-      - name: Deploy docs for all packages to GitHub Pages
+
+          pushd packages/$PACKAGE_NAME
+          npx typedoc --json ../../docs-json --options typedoc.json --validation.invalidLink
+          popd
+
+          npx typedoc --entrypointStrategy merge "docs-json/*.json"
+      - name: Deploy docs to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:

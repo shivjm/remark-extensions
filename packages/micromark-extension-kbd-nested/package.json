@@ -20,9 +20,11 @@
     "url": "https://github.com/shivjm/remark-extensions.git"
   },
   "scripts": {
-    "build": "rimraf lib && tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json",
+    "build:clean": "rimraf lib && npm run build",
     "lint": "eslint src/**/*.ts",
-    "test": "mocha tests/**/*.ts"
+    "test": "mocha tests/**/*.ts",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "micromark-util-character": "^1.1.0",
@@ -53,7 +55,8 @@
   },
   "type": "module",
   "publishConfig": {
-    "main": "lib/index.js",
+    "main": "./lib/cjs/index.js",
+    "module": "./lib/esm/index.js",
     "typings": "index.d.ts"
   },
   "files": [

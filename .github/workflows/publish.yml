@@ -57,10 +57,10 @@ jobs:
           mkdir -p $DOCS_JSON_PATH
 
           pushd packages/$PACKAGE_NAME
-          npx typedoc@$TYEPDOC_VERSION --json ../../$DOCS_JSON_PATH/$PACKAGE_NAME.json --options typedoc.json --validation.invalidLink
+          npx typedoc@$TYPEDOC_VERSION --json ../../$DOCS_JSON_PATH/$PACKAGE_NAME.json --options typedoc.json --validation.invalidLink
           popd
 
-          npx typedoc@$TYPEDOC_VERSION --entryPointStrategy Merge "$DOCS_JSON_PATH/*.json"
+          npx typedoc@$TYPEDOC_VERSION --entryPointStrategy merge "$DOCS_JSON_PATH/*.json"
       - name: Deploy docs to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2

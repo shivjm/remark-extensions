@@ -38,7 +38,7 @@ jobs:
 
           cd packages/$package
           pnpm install --frozen-lockfile --filter "$package..."
-          pnpm run build --filter "$package"
+          pnpm run -r build --filter "$package"
           pnpm publish --no-git-checks --filter "$package"
       - name: Generate docs for all packages
         # TODO this means updating all docs for all changes, not just
@@ -46,7 +46,7 @@ jobs:
         # TypeStrong/typedoc#1791
         run: |
           pnpm install -r --frozen-lockfile
-          pnpm typedoc
+          pnpm run -r typedoc
       - name: Deploy docs for all packages to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2

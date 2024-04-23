@@ -45,19 +45,21 @@ jobs:
       - name: Check out just docs
         uses: actions/checkout@v4
         with:
+          path: "gh-pages"
           ref: "gh-pages"
           sparse-checkout: "docs-json"
       - name: Update documentation
         run: |
+          DOCS_JSON_PATH=gh-pages/docs-json
           pnpm install -r --frozen-lockfile
 
-          mkdir -p docs-json
+          mkdir -p $DOCS_JSON_PATH
 
           pushd packages/$PACKAGE_NAME
-          npx typedoc --json ../../docs-json --options typedoc.json --validation.invalidLink
+          npx typedoc --json ../../$DOCS_JSON_PATH/$PACKAGE_NAME.json --options typedoc.json --validation.invalidLink
           popd
 
-          npx typedoc --entrypointStrategy merge "docs-json/*.json"
+          npx typedoc --entrypointStrategy merge "$DOCS_JSON_PATH/*.json"
       - name: Deploy docs to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2

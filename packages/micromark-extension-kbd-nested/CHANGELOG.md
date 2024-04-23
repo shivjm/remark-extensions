@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.6.0 (2024-04-23)
+
+### ⚠ BREAKING CHANGES
+
+* provide separate CJS and ESM builds
+* require pnpm v9 and Node v18
+* exclude source files from published packages
+
+### Bug Fixes
+
+* **micromark-extension-kbd-nested:** properly declare types ([32f234e](https://github.com/shivjm/remark-extensions/commit/32f234ea361d9b681bfbbb4a1d72369d1cc3028f))
+* **micromark-extension-kbd-nested:** remove `pnpm` from `engines` ([971da00](https://github.com/shivjm/remark-extensions/commit/971da00e08d99a6a6cb00d2e2c9bd8518c8d4798))
+
+
+### Build System
+
+* exclude source files from published packages ([c8b5b5c](https://github.com/shivjm/remark-extensions/commit/c8b5b5c19ea0fd0f5cedc5aa64294a1280b00504))
+* provide separate CJS and ESM builds ([a63e422](https://github.com/shivjm/remark-extensions/commit/a63e4225c3911445289d6be9696df879fab944b6))
+* require pnpm v9 and Node v18 ([2942736](https://github.com/shivjm/remark-extensions/commit/29427362a41692c964918ad6d9a3eabebfe4bbcb))
+
 ## 0.5.0 (2021-11-10)
 
 ### ⚠ BREAKING CHANGES

@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.5.0 (2024-04-23)
+
+### ⚠ BREAKING CHANGES
+
+* provide separate CJS and ESM builds
+* require pnpm v9 and Node v18
+* exclude source files from published packages
+
+### Bug Fixes
+
+* **remark-kbd-nested:** remove `pnpm` from `engines` ([0dba2f2](https://github.com/shivjm/remark-extensions/commit/0dba2f204bdc452c8f11f486162ddccad2f2eda6))
+
+
+### Build System
+
+* exclude source files from published packages ([c8b5b5c](https://github.com/shivjm/remark-extensions/commit/c8b5b5c19ea0fd0f5cedc5aa64294a1280b00504))
+* provide separate CJS and ESM builds ([a63e422](https://github.com/shivjm/remark-extensions/commit/a63e4225c3911445289d6be9696df879fab944b6))
+* require pnpm v9 and Node v18 ([2942736](https://github.com/shivjm/remark-extensions/commit/29427362a41692c964918ad6d9a3eabebfe4bbcb))
+
 ## 0.4.1 (2021-11-14)
 ## 0.4.0 (2021-11-10)
 

@@ -1,11 +1,9 @@
 {
   "name": "remark-extensions",
   "engines": {
-    "node": ">=10",
-    "pnpm": ">=3"
+    "node": ">=18"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "lint": "pnpm lint -r",
     "build": "pnpm build -r --parallel",
     "test": "pnpm test -r",

@@ -1,6 +1,6 @@
 {
   "name": "micromark-extension-kbd-nested",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "micromark extension for `kbd` element syntax with nesting, escaping & configurable delimiter",
   "keywords": [
     "micromark",
@@ -50,8 +50,7 @@
     "typescript": "^4.4.4"
   },
   "engines": {
-    "node": ">=18",
-    "pnpm": ">=9"
+    "node": ">=18"
   },
   "type": "module",
   "publishConfig": {

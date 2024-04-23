@@ -29,15 +29,14 @@ jobs:
       - name: Publish single module
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
 
         # the `echo` below deliberately uses single quotes so that the
         # token isn’t written to the file; instead, npm should replace
         # it at runtime.
 
         run: |
-          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
-
           cd packages/$PACKAGE_NAME
           pnpm install --frozen-lockfile --filter "$PACKAGE_NAME..."
           pnpm run -r build --filter "$PACKAGE_NAME"

@@ -59,7 +59,7 @@ jobs:
           npx typedoc --json ../../$DOCS_JSON_PATH/$PACKAGE_NAME.json --options typedoc.json --validation.invalidLink
           popd
 
-          npx typedoc --entrypointStrategy merge "$DOCS_JSON_PATH/*.json"
+          npx typedoc --entryPointStrategy merge "$DOCS_JSON_PATH/*.json"
       - name: Deploy docs to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2

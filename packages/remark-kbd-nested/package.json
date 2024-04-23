@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/shivjm/remark-extensions#readme",
   "engines": {
-    "node": ">=12",
-    "pnpm": ">=6"
+    "node": ">=18",
+    "pnpm": ">=9"
   },
   "type": "module",
   "publishConfig": {

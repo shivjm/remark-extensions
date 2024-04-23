@@ -43,7 +43,7 @@ jobs:
         run: |
           pushd packages/$PACKAGE_NAME
           pnpm install --frozen-lockfile --filter "$PACKAGE_NAME..."
-          pnpm run --filter "$PACKAGE_NAME" -r build
+          # `publish` calls `npm run build` because of the `prepublish` hook.
           pnpm publish --filter "$PACKAGE_NAME" --no-git-checks
           popd
       - name: Check out just docs
@@ -54,6 +54,8 @@ jobs:
       - name: Update documentation
         run: |
           pnpm install -r --frozen-lockfile
+
+          mkdir -p docs-json
 
           pushd packages/$PACKAGE_NAME
           npx typedoc --json ../../docs-json --options typedoc.json --validation.invalidLink

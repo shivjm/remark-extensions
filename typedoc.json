@@ -1,4 +1,6 @@
 {
+  "entryPoints": ["packages/*"],
   "validation": true,
-  "excludeExternals": true
+  "entryPointStrategy": true,
+  "includeVersion": false
 }

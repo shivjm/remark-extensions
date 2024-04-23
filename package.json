@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "standard-version": "^9.5.0",
-    "typedoc": "^0.22.18"
+    "typedoc": "^0.25.13"
   }
 }

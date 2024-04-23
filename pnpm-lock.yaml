@@ -82,7 +82,7 @@ importers:
   packages/remark-kbd-nested:
     dependencies:
       micromark-extension-kbd-nested:
-        specifier: workspace:^0.5.0
+        specifier: workspace:^
         version: link:../micromark-extension-kbd-nested
     devDependencies:
       '@types/chai':

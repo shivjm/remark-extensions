@@ -17,7 +17,7 @@
     }
   },
   "devDependencies": {
-    "standard-version": "^9.3.2",
-    "typedoc": "^0.22.7"
+    "standard-version": "^9.5.0",
+    "typedoc": "^0.22.18"
   }
 }

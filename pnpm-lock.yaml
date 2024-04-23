@@ -12,10 +12,10 @@ importers:
   .:
     devDependencies:
       standard-version:
-        specifier: ^9.3.2
+        specifier: ^9.5.0
         version: 9.5.0
       typedoc:
-        specifier: ^0.22.7
+        specifier: ^0.22.18
         version: 0.22.18(typescript@4.9.5)
 
   packages/micromark-extension-kbd-nested:

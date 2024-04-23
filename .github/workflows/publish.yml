@@ -62,6 +62,8 @@ jobs:
           popd
 
           npx typedoc@$TYPEDOC_VERSION --entryPointStrategy merge "$DOCS_JSON_PATH/*.json"
+
+          mv $DOCS_JSON_PATH docs
       - name: Deploy docs to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v4

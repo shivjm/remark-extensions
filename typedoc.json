@@ -1,6 +1,5 @@
 {
   "entryPoints": ["packages/*"],
   "validation": true,
-  "entryPointStrategy": true,
   "includeVersion": false
 }

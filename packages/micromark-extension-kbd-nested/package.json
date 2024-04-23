@@ -20,7 +20,7 @@
     "url": "https://github.com/shivjm/remark-extensions.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json",
+    "build": "tsc -p tsconfig.build.json",
     "build:clean": "rimraf lib && npm run build",
     "lint": "eslint src/**/*.ts",
     "test": "mocha tests/**/*.ts",
@@ -54,9 +54,12 @@
   },
   "type": "module",
   "publishConfig": {
-    "main": "./lib/cjs/index.js",
-    "module": "./lib/esm/index.js",
-    "typings": "index.d.ts"
+    "exports": {
+      ".": {
+        "import": "./lib/index.js",
+        "types": "./lib/index.d.ts"
+      }
+    }
   },
   "files": [
     "lib/"

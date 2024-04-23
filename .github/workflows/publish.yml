@@ -22,6 +22,8 @@ jobs:
         with:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
+          # Forces the creation of an .npmrc that reads `NODE_AUTH_TOKEN`
+          registry-url: "https://registry.npmjs.org"
       - name: Register package name
         run: |
           PACKAGE_NAME=`echo "${{ github.event.release.name }}" | cut -d ' ' -f 1`

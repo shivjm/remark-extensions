@@ -4,7 +4,7 @@
   "description": "remark plugin to add support for `kbd` element syntax with configurable delimiters, escaping, and arbitrary nesting",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.cjs.json",
+    "build": "tsc -p tsconfig.build.json",
     "build:clean": "rimraf lib && npm run build",
     "lint": "eslint src/**/*.ts",
     "test": "mocha tests/**/*.ts",
@@ -32,9 +32,12 @@
   },
   "type": "module",
   "publishConfig": {
-    "main": "./lib/cjs/index.js",
-    "module": "./lib/esm/index.js",
-    "typings": "index.d.ts"
+    "exports": {
+      ".": {
+        "import": "./lib/index.js",
+        "types": "./lib/index.d.ts"
+      }
+    }
   },
   "devDependencies": {
     "@types/chai": "^4.2.22",

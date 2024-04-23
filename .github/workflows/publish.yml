@@ -41,10 +41,11 @@ jobs:
         # it at runtime.
 
         run: |
-          cd packages/$PACKAGE_NAME
+          pushd packages/$PACKAGE_NAME
           pnpm install --frozen-lockfile --filter "$PACKAGE_NAME..."
           pnpm run --filter "$PACKAGE_NAME" -r build
           pnpm publish --filter "$PACKAGE_NAME" --no-git-checks
+          popd
       - name: Check out just docs
         uses: actions/checkout@v4
         with:

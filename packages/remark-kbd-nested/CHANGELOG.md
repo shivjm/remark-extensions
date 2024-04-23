@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.6.1 (2024-04-23)
+
+### Bug Fixes
+
+* **remark-kbd-nested:** put files under correct directory ([4c9a2f4](https://github.com/shivjm/remark-extensions/commit/4c9a2f407f373ba8c000663657f2c14a23abd7ec))
+
 ## 0.6.0 (2024-04-23)
 
 ### ⚠ BREAKING CHANGES

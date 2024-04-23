@@ -36,10 +36,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
-        # the `echo` below deliberately uses single quotes so that the
-        # token isn’t written to the file; instead, npm should replace
-        # it at runtime.
-
         run: |
           pushd packages/$PACKAGE_NAME
           pnpm install --frozen-lockfile --filter "$PACKAGE_NAME..."

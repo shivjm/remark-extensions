@@ -28,8 +28,8 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
 const output = remark()
-      .use(remarkKbdNested).
-      use(remarkRehype)
+      .use(remarkKbdNested)
+      .use(remarkRehype)
       .use(rehypeStringify)
       .processSync("Press ||| ||Ctrl|| + || \| || |||, then || //key// ||.");
 
@@ -56,7 +56,7 @@ are passed directly to [micromark-extension-kbd-nested][].
 
 ## License
 
-[ISC][license] © [Shiv Jha Mathur][author]
+[ISC][LICENSE] © [Shiv Jha Mathur][author]
 
 [test-badge]: https://github.com/shivjm/remark-extensions/actions/workflows/test.yml/badge.svg
 
@@ -77,3 +77,5 @@ are passed directly to [micromark-extension-kbd-nested][].
 [micromark-extension-kbd-nested]: https://www.npmjs.com/package/micromark-extension-kbd-nested
 
 [license]: ../../license
+
+[author]: https://github.com/shivjm/

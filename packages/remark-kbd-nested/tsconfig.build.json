@@ -3,8 +3,8 @@
   "include": ["src"],
   "exclude": ["node_modules", "tests"],
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": "lib/esm",
     "declaration": true,
-    "declarationDir": "lib"
+    "declarationDir": "lib/esm"
   }
 }

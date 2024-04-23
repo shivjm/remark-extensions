@@ -50,7 +50,9 @@ import type {
   Effects,
   Event,
   Extension,
+  HtmlExtension,
   State,
+  TokenTypeMap,
   Tokenizer,
 } from "micromark-util-types";
 import { codes } from "micromark-util-symbol/codes";
@@ -67,6 +69,17 @@ export interface IOptions {
 }
 
 const MINIMUM_MARKER_LENGTH = 2;
+const VARIABLE_MARKER_LENGTH = 2;
+
+declare module "micromark-util-types" {
+  interface TokenTypeMap {
+    keyboardSequence: "keyboardSequence";
+    keyboardSequenceEscape: "keyboardSequenceEscape";
+    keyboardSequenceMarker: "keyboardSequenceMarker";
+    keyboardSequenceVariableMarker: "keyboardSequenceVariableMarker";
+    keyboardSequenceVariable: "keyboardSequenceVariableMarker";
+  }
+}
 
 const KEYBOARD_TYPE = "keyboardSequence";
 const KEYBOARD_TEXT_TYPE = types.codeTextData; // TODO check whether this is okay
@@ -84,7 +97,7 @@ const DEFAULT_VARIABLE_DELIMITER = codes.slash;
  * Extension for micromark to compile keyboard sequences as `<kbd>`
  * elements and variable sequences as `<var>` elements. Can be passed
  * in `htmlExtensions.` */
-export const html: Extension = Object.freeze({
+export const html: HtmlExtension = Object.freeze({
   enter: {
     [KEYBOARD_TYPE]: function (this: CompileContext): void {
       this.tag("<kbd>");
@@ -335,7 +348,7 @@ function makeVariableTokenizer(delimiter: number): Tokenizer {
       size++;
       effects.consume(delimiter);
 
-      if (size === MINIMUM_MARKER_LENGTH) {
+      if (size === VARIABLE_MARKER_LENGTH) {
         effects.exit(KEYBOARD_VARIABLE_MARKER_TYPE);
         return gap;
       }
@@ -400,7 +413,7 @@ function makeVariableClosingTokenizer(delimiter: number): Tokenizer {
       if (code === delimiter) {
         effects.consume(code);
         size++;
-        if (size === MINIMUM_MARKER_LENGTH) {
+        if (size === VARIABLE_MARKER_LENGTH) {
           effects.exit(KEYBOARD_VARIABLE_MARKER_TYPE);
           effects.exit(KEYBOARD_VARIABLE_TYPE);
 
@@ -483,8 +496,8 @@ function makeConsumeOne(effects: Effects, next: State): (code: Code) => State {
 function makeLiteral(
   effects: Effects,
   next: State,
-  outerType: string,
-  escapeType: string,
+  outerType: keyof TokenTypeMap,
+  escapeType: keyof TokenTypeMap,
 ): (code: Code) => State {
   return (code: Code) => {
     if (code === codes.backslash) {

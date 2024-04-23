@@ -6,20 +6,20 @@ on:
       - main
 
 env:
-  PNPM_VERSION: "6.19.1"
-  NODE_VERSION: "14.17.3"
+  PNPM_VERSION: "9.0.4"
+  NODE_VERSION: "18.17.0"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v3
         with:
           version: "${{ env.PNPM_VERSION }}"
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
@@ -35,33 +35,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v3
         with:
           version: "${{ env.PNPM_VERSION }}"
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run build
-        run: pnpm run build
+        run: pnpm run -r build
   check-docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v3
         with:
           version: "${{ env.PNPM_VERSION }}"
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version: "${{ env.NODE_VERSION }}"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate docs for all packages
-        run: pnpm typedoc
+        run: pnpm run -r typedoc

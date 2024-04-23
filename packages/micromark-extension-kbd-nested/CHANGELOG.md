@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.7.1 (2024-04-23)
+
+### Bug Fixes
+
+* **micromark-extension-kbd-nested:** put files under correct directory ([f66c679](https://github.com/shivjm/remark-extensions/commit/f66c679941e7e039f1677ddd643d2a87b27d49dd))
+
 ## 0.7.0 (2024-04-23)
 
 ### ⚠ BREAKING CHANGES

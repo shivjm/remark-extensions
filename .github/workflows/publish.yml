@@ -39,8 +39,8 @@ jobs:
         run: |
           cd packages/$PACKAGE_NAME
           pnpm install --frozen-lockfile --filter "$PACKAGE_NAME..."
-          pnpm run -r build --filter "$PACKAGE_NAME"
-          pnpm publish --no-git-checks --filter "$PACKAGE_NAME"
+          pnpm run --filter "$PACKAGE_NAME" -r build
+          pnpm publish --filter "$PACKAGE_NAME" --no-git-checks
       - name: Check out just docs
         uses: actions/checkout@v4
         with:

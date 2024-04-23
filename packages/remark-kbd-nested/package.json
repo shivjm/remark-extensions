@@ -59,5 +59,8 @@
   },
   "dependencies": {
     "micromark-extension-kbd-nested": "workspace:^0.5.0"
-  }
+  },
+  "files": [
+    "lib/"
+  ]
 }

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.7.0 (2024-04-23)
+
+### ⚠ BREAKING CHANGES
+
+* **micromark-extension-kbd-nested:** revert to only ESM build
+
+### Features
+
+* **micromark-extension-kbd-nested:** revert to only ESM build ([18ff39d](https://github.com/shivjm/remark-extensions/commit/18ff39d6a6978f147e8657d576eee42acf7814c9))
+
 ## 0.6.10 (2024-04-23)
 ## 0.6.9 (2024-04-23)
 ## 0.6.8 (2024-04-23)

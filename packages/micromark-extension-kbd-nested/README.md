@@ -8,10 +8,12 @@
 configurable delimiters, escaping, `var` sequences, and arbitrary
 nesting (e.g. <kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).
 
+[Docs at shivjm.github.io/remark-extensions.](https://shivjm.github.io/remark-extensions/modules/micromark_extension_kbd_nested.html)
+
 ## Install
 
 This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+Node 18+ is needed to use it and it must be `import`ed instead of `require`d.
 
 [npm][]:
 

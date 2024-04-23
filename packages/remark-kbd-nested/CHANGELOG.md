@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.6.0 (2024-04-23)
+
+### ⚠ BREAKING CHANGES
+
+* **remark-kbd-nested:** revert to only ESM build
+
+### Features
+
+* **remark-kbd-nested:** revert to only ESM build ([47858f9](https://github.com/shivjm/remark-extensions/commit/47858f95ad68579ec5e77d079027fc94832b3855))
+
 ## 0.5.2 (2024-04-23)
 ## 0.5.1 (2024-04-23)
 ## 0.5.0 (2024-04-23)

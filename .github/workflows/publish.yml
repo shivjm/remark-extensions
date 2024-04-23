@@ -12,6 +12,7 @@ env:
 jobs:
   publish:
     permissions:
+      contents: write
       id-token: write
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +64,7 @@ jobs:
           npx typedoc@$TYPEDOC_VERSION --entryPointStrategy merge "$DOCS_JSON_PATH/*.json"
       - name: Deploy docs to GitHub Pages
         if: success()
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
           build_dir: docs

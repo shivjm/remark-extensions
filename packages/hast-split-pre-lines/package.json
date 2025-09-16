@@ -1,6 +1,6 @@
 {
   "name": "hast-split-pre-lines",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "hast tool to split pre elements into lines",
   "main": "src/index.ts",
   "scripts": {

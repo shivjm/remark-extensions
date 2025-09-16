@@ -1,0 +1,61 @@
+{
+  "name": "hast-split-pre-lines",
+  "version": "1.0.0",
+  "description": "hast tool to split pre elements into lines",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:clean": "rimraf lib && npm run build",
+    "lint": "eslint src/**/*.ts --config ../../eslint.config.mjs",
+    "test": "node --import tsx --test tests/index.ts",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivjm/remark-extensions.git"
+  },
+  "keywords": [
+    "hast",
+    "code",
+    "pre",
+    "plugin"
+  ],
+  "author": "Shiv Jha-Mathur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivjm/remark-extensions/issues"
+  },
+  "homepage": "https://github.com/shivjm/remark-extensions#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./lib/index.js",
+        "types": "./lib/index.d.ts"
+      }
+    }
+  },
+  "dependencies": {
+    "hast-util-from-parse5": "^8.0.3",
+    "hast-util-to-html": "^9.0.5",
+    "parse5": "^8.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "@types/debug": "^4.1.12",
+    "@types/hast": "^3.0.4",
+    "@types/node": "^24.5.0",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "eslint": "^9.1.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1",
+    "tsx": "^4.20.5",
+    "typescript": "^4.4.4",
+    "typescript-eslint": "^7.7.1"
+  }
+}

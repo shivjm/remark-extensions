@@ -18,7 +18,7 @@ Node 18+ is needed to use it and it must be `import`ed instead of `require`d.
 [npm][]:
 
 ```sh
-npm install micromark-extension-kbd-nested
+npm install remark-kbd-nested
 ```
 
 ## Use

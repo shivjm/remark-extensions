@@ -7,7 +7,7 @@ on:
 
 env:
   PNPM_VERSION: "9.0.4"
-  NODE_VERSION: "18.17.0"
+  NODE_VERSION: "18.20.5"
 
 jobs:
   test:

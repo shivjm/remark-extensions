@@ -1,0 +1,862 @@
+{
+	"id": 0,
+	"name": "micromark-extension-kbd-nested",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"comment": {
+		"summary": [
+			{
+				"kind": "text",
+				"text": "[micromark](https://github.com/micromark/micromark) extension to\nsupport "
+			},
+			{
+				"kind": "code",
+				"text": "`kbd`"
+			},
+			{
+				"kind": "text",
+				"text": " element syntax with configurable delimiters,\nescaping, "
+			},
+			{
+				"kind": "code",
+				"text": "`var`"
+			},
+			{
+				"kind": "text",
+				"text": " sequences, and arbitrary nesting (e.g.\n<kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).\n\n**Warning**: Do not set delimiters to characters that already being\nprocessed specially. This will result in undefined behaviour.\n\n## Syntax\n\n### Keyboard sequences\n\nRecognizes any sequence of two or more unescaped occurrences of\n"
+			},
+			{
+				"kind": "inline-tag",
+				"tag": "@link",
+				"text": "delimiter",
+				"target": 6
+			},
+			{
+				"kind": "text",
+				"text": " (defaults to "
+			},
+			{
+				"kind": "code",
+				"text": "`|`"
+			},
+			{
+				"kind": "text",
+				"text": ") as a\nkeyboard sequence.\n\n* All whitespace is preserved except immediately after an opening\n  sequence or immediately before a closing sequence.\n* Nesting is possible using a longer sequence on the outside and a\n  shorter sequence on the inside. For example, "
+			},
+			{
+				"kind": "code",
+				"text": "`||| ||Ctrl|| + ||x||\n  |||`"
+			},
+			{
+				"kind": "text",
+				"text": " will yield <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>.\n* The opening sequence will be considered to end at the first\n  whitespace character or non-delimiter, including escape characters.\n  For example, these will all produce "
+			},
+			{
+				"kind": "code",
+				"text": "`<kbd>|</kbd>`"
+			},
+			{
+				"kind": "text",
+				"text": ":\n  * "
+			},
+			{
+				"kind": "code",
+				"text": "`||\\|||`"
+			},
+			{
+				"kind": "text",
+				"text": "\n  * "
+			},
+			{
+				"kind": "code",
+				"text": "`|| | ||`"
+			},
+			{
+				"kind": "text",
+				"text": "\n  * "
+			},
+			{
+				"kind": "code",
+				"text": "`||        | ||`"
+			},
+			{
+				"kind": "text",
+				"text": "\n  * "
+			},
+			{
+				"kind": "code",
+				"text": "`++|++`"
+			},
+			{
+				"kind": "text",
+				"text": " (with a delimiter of "
+			},
+			{
+				"kind": "code",
+				"text": "`+`"
+			},
+			{
+				"kind": "text",
+				"text": ")\n  * "
+			},
+			{
+				"kind": "code",
+				"text": "`++ | ++`"
+			},
+			{
+				"kind": "text",
+				"text": " (with a delimiter of "
+			},
+			{
+				"kind": "code",
+				"text": "`+`"
+			},
+			{
+				"kind": "text",
+				"text": ")\n\n### Variable sequence\n\nRecognizes sequences of two occurrences of "
+			},
+			{
+				"kind": "inline-tag",
+				"tag": "@link",
+				"text": "delimiter",
+				"target": 7
+			},
+			{
+				"kind": "text",
+				"text": " (defaults to "
+			},
+			{
+				"kind": "code",
+				"text": "`/`"
+			},
+			{
+				"kind": "text",
+				"text": ") *within*\nkeyboard sequences as mark variable sections.\n\n* Must always use two variable delimiters. Further occurrences will be\n  interpreted as the closing sequence.\n* Cannot be nested.\n* All whitespace is preserved except immediately after an opening\n  sequence or immediately before a closing sequence."
+			}
+		]
+	},
+	"children": [
+		{
+			"id": 5,
+			"name": "IOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Options that can be passed to the extension."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 6,
+					"name": "delimiter",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Character code or character to use as a delimiter for keyboard sequences. Defaults to "
+							},
+							{
+								"kind": "code",
+								"text": "`|`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 65,
+							"character": 2,
+							"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L65"
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				},
+				{
+					"id": 7,
+					"name": "variableDelimiter",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Character code or character to use as a delimiter for variable sequences within keyboard sequences. Defaults to "
+							},
+							{
+								"kind": "code",
+								"text": "`/`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 68,
+							"character": 2,
+							"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L68"
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						6,
+						7
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 63,
+					"character": 17,
+					"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L63"
+				}
+			]
+		},
+		{
+			"id": 8,
+			"name": "html",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Extension for micromark to compile keyboard sequences as "
+					},
+					{
+						"kind": "code",
+						"text": "`<kbd>`"
+					},
+					{
+						"kind": "text",
+						"text": "\nelements and variable sequences as "
+					},
+					{
+						"kind": "code",
+						"text": "`<var>`"
+					},
+					{
+						"kind": "text",
+						"text": " elements. Can be passed\nin "
+					},
+					{
+						"kind": "code",
+						"text": "`htmlExtensions.`"
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 100,
+					"character": 13,
+					"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L100"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../node_modules/.pnpm/micromark-util-types@1.1.0/node_modules/micromark-util-types/index.d.ts",
+					"qualifiedName": "HtmlExtension"
+				},
+				"name": "HtmlExtension",
+				"package": "micromark-util-types"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 1,
+			"name": "normalizeDelimiter",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 440,
+					"character": 16,
+					"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L440"
+				}
+			],
+			"signatures": [
+				{
+					"id": 2,
+					"name": "normalizeDelimiter",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Converts the optional "
+							},
+							{
+								"kind": "code",
+								"text": "`delimiter`"
+							},
+							{
+								"kind": "text",
+								"text": " into a character code. Returns\n"
+							},
+							{
+								"kind": "code",
+								"text": "`defaultValue`"
+							},
+							{
+								"kind": "text",
+								"text": " if no delimiter is provided."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 440,
+							"character": 16,
+							"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L440"
+						}
+					],
+					"parameters": [
+						{
+							"id": 3,
+							"name": "delimiter",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "The optional character code or character."
+									}
+								]
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						},
+						{
+							"id": 4,
+							"name": "defaultValue",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "The character code to return if no delimiter is provided."
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			]
+		},
+		{
+			"id": 9,
+			"name": "syntax",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 128,
+					"character": 13,
+					"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L128"
+				}
+			],
+			"signatures": [
+				{
+					"id": 10,
+					"name": "syntax",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Returns an extension for micromark to parse keyboard sequences\noptionally containing variable sequences. Can be passed in\n"
+							},
+							{
+								"kind": "code",
+								"text": "`extensions`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "Extension to parse keyboard sequences."
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 128,
+							"character": 22,
+							"url": "https://github.com/shivjm/remark-extensions/blob/a032a11bbdda98a11cfa82ebfa794dd802bf1ada/packages/micromark-extension-kbd-nested/src/index.ts#L128"
+						}
+					],
+					"parameters": [
+						{
+							"id": 11,
+							"name": "options",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 5,
+								"name": "IOptions",
+								"package": "micromark-extension-kbd-nested"
+							},
+							"defaultValue": "{}"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../node_modules/.pnpm/micromark-util-types@1.1.0/node_modules/micromark-util-types/index.d.ts",
+							"qualifiedName": "Extension"
+						},
+						"name": "Extension",
+						"package": "micromark-util-types"
+					}
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Interfaces",
+			"children": [
+				5
+			]
+		},
+		{
+			"title": "Variables",
+			"children": [
+				8
+			]
+		},
+		{
+			"title": "Functions",
+			"children": [
+				1,
+				9
+			]
+		}
+	],
+	"packageName": "micromark-extension-kbd-nested",
+	"packageVersion": "0.7.1",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# micromark-extension-kbd-nested\n\n[![Build][test-badge]][build]\n[![Downloads][downloads-badge]][downloads]\n[![Size][size-badge]][size]\n\n**[micromark][]** extension to support "
+		},
+		{
+			"kind": "code",
+			"text": "`kbd`"
+		},
+		{
+			"kind": "text",
+			"text": " element syntax with\nconfigurable delimiters, escaping, "
+		},
+		{
+			"kind": "code",
+			"text": "`var`"
+		},
+		{
+			"kind": "text",
+			"text": " sequences, and arbitrary\nnesting (e.g. <kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).\n\n[Docs at shivjm.github.io/remark-extensions.](https://shivjm.github.io/remark-extensions/modules/micromark_extension_kbd_nested.html)\n\n## Install\n\nThis package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):\nNode 18+ is needed to use it and it must be "
+		},
+		{
+			"kind": "code",
+			"text": "`import`"
+		},
+		{
+			"kind": "text",
+			"text": "ed instead of "
+		},
+		{
+			"kind": "code",
+			"text": "`require`"
+		},
+		{
+			"kind": "text",
+			"text": "d.\n\n[npm][]:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```sh\nnpm install micromark-extension-kbd-nested\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Use\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```js\nimport {micromark} from 'micromark'\nimport {\n  html,\n  syntax\n} from 'micromark-extension-kbd-nested';\n\nconst output = micromark('Press ||| ||Ctrl|| + || \\| || |||, then || //key// ||.', {\n  extensions: [syntax()],\n  htmlExtensions: [html]\n})\n\nconsole.log(output)\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nYields:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```html\n<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>|</kbd></kbd>, then <kbd><var>key</var></kbd>.</p>\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Syntax\n\n### Keyboard sequences\nRecognizes any sequence of two or more unescaped occurrences of\n"
+		},
+		{
+			"kind": "code",
+			"text": "`delimiter`"
+		},
+		{
+			"kind": "text",
+			"text": " (defaults to "
+		},
+		{
+			"kind": "code",
+			"text": "`|`"
+		},
+		{
+			"kind": "text",
+			"text": ") as a keyboard sequence.\n  \n* All is preserved except immediately after an opening sequence or\n  immediately before a closing sequence.\n* Nesting is possible by using a longer sequence on the outside and a\n  shorter sequence on the inside, e.g. "
+		},
+		{
+			"kind": "code",
+			"text": "`||| ||Ctrl|| + ||x|| |||`"
+		},
+		{
+			"kind": "text",
+			"text": " will\n  be turned into <kbd><kbd>Ctrl</kbd> + <kbd>x</kbd></kbd>.\n* The opening sequence will be considered to end at the first\n  whitespace character or non-delimiter, including escape characters.\n  For example, these will all produce "
+		},
+		{
+			"kind": "code",
+			"text": "`<kbd>|</kbd>`"
+		},
+		{
+			"kind": "text",
+			"text": ":\n  * "
+		},
+		{
+			"kind": "code",
+			"text": "`||\\|||`"
+		},
+		{
+			"kind": "text",
+			"text": "\n  * "
+		},
+		{
+			"kind": "code",
+			"text": "`|| | ||`"
+		},
+		{
+			"kind": "text",
+			"text": "\n  * "
+		},
+		{
+			"kind": "code",
+			"text": "`||        | ||`"
+		},
+		{
+			"kind": "text",
+			"text": "\n  * "
+		},
+		{
+			"kind": "code",
+			"text": "`++|++`"
+		},
+		{
+			"kind": "text",
+			"text": " (with a delimiter of "
+		},
+		{
+			"kind": "code",
+			"text": "`+`"
+		},
+		{
+			"kind": "text",
+			"text": ")\n  * "
+		},
+		{
+			"kind": "code",
+			"text": "`++ | ++`"
+		},
+		{
+			"kind": "text",
+			"text": " (with a delimiter of "
+		},
+		{
+			"kind": "code",
+			"text": "`+`"
+		},
+		{
+			"kind": "text",
+			"text": ")\n  \n### Variable sequence\n"
+		},
+		{
+			"kind": "code",
+			"text": "`variableDelimiter`"
+		},
+		{
+			"kind": "text",
+			"text": " (defaults to "
+		},
+		{
+			"kind": "code",
+			"text": "`/`"
+		},
+		{
+			"kind": "text",
+			"text": ") can be used *within* keyboard\nsequences to mark variable sections.\n\n* Must always use two variable delimiters.\n* Cannot be nested.\n* All is preserved except immediately after an opening sequence or\n  immediately before a closing sequence.\n\n## API\n\nThis package exports the following identifiers: "
+		},
+		{
+			"kind": "code",
+			"text": "`html`"
+		},
+		{
+			"kind": "text",
+			"text": ", "
+		},
+		{
+			"kind": "code",
+			"text": "`syntax`"
+		},
+		{
+			"kind": "text",
+			"text": ".\nThere is no default export.\n\n### "
+		},
+		{
+			"kind": "code",
+			"text": "`html`"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nExtension for micromark to compile as "
+		},
+		{
+			"kind": "code",
+			"text": "`<kbd>`"
+		},
+		{
+			"kind": "text",
+			"text": " and "
+		},
+		{
+			"kind": "code",
+			"text": "`<var>`"
+		},
+		{
+			"kind": "text",
+			"text": " elements\n(can be passed in "
+		},
+		{
+			"kind": "code",
+			"text": "`htmlExtensions`"
+		},
+		{
+			"kind": "text",
+			"text": ").\n\n### "
+		},
+		{
+			"kind": "code",
+			"text": "`syntax(options?)`"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nReturns an extension for micromark to parse keyboard sequences\noptionally containing variable sequences (can be passed in\n"
+		},
+		{
+			"kind": "code",
+			"text": "`extensions`"
+		},
+		{
+			"kind": "text",
+			"text": ").\n\nDo not pass characters that are already being processed specially as\nthe delimiters.\n\n#### "
+		},
+		{
+			"kind": "code",
+			"text": "`options`"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n| Name | Description | Default |\n|------|-------------|---------|\n| "
+		},
+		{
+			"kind": "code",
+			"text": "`delimiter`"
+		},
+		{
+			"kind": "text",
+			"text": " | Character to use as delimiter | "
+		},
+		{
+			"kind": "code",
+			"text": "`|`"
+		},
+		{
+			"kind": "text",
+			"text": " |\n| "
+		},
+		{
+			"kind": "code",
+			"text": "`variableDelimiter`"
+		},
+		{
+			"kind": "text",
+			"text": " | Character to use as variable delimiter | "
+		},
+		{
+			"kind": "code",
+			"text": "`/`"
+		},
+		{
+			"kind": "text",
+			"text": " |\n\n## License\n\n[ISC][license] © [Shiv Jha Mathur][author]\n\n<!-- Definitions -->\n\n[author]: https://github.com/shivjm\n\n[test-badge]: https://github.com/shivjm/remark-extensions/actions/workflows/test.yml/badge.svg\n\n[build]: https://github.com/shivjm/remark-extensions/actions\n\n[downloads-badge]: https://img.shields.io/npm/dm/micromark-extension-kbd-nested.svg\n\n[downloads]: https://www.npmjs.com/package/micromark-extension-kbd-nested\n\n[size-badge]: https://img.shields.io/bundlephobia/minzip/micromark-extension-kbd-nested.svg\n\n[size]: https://bundlephobia.com/result?p=micromark-extension-kbd-nested\n\n[npm]: https://docs.npmjs.com/cli/install\n\n[license]: ../../license\n\n[micromark]: https://github.com/micromark/micromark\n\n[from-markdown]: https://github.com/syntax-tree/mdast-util-from-markdown\n\n[to-markdown]: https://github.com/syntax-tree/mdast-util-to-markdown\n\n[remark]: https://github.com/remarkjs/remark"
+		}
+	],
+	"symbolIdMap": {
+		"0": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "normalizeDelimiter"
+		},
+		"2": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "normalizeDelimiter"
+		},
+		"3": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "delimiter"
+		},
+		"4": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "defaultValue"
+		},
+		"5": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "IOptions"
+		},
+		"6": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "IOptions.delimiter"
+		},
+		"7": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "IOptions.variableDelimiter"
+		},
+		"8": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "html"
+		},
+		"9": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "syntax"
+		},
+		"10": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "syntax"
+		},
+		"11": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "options"
+		}
+	}
+}

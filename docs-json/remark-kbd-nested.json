@@ -1,0 +1,454 @@
+{
+	"id": 0,
+	"name": "remark-kbd-nested",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"comment": {
+		"summary": [
+			{
+				"kind": "text",
+				"text": "[remark](https://github.com/remarkjs/remark) plugin to support\nkeyboard and variable sequences. See "
+			},
+			{
+				"kind": "inline-tag",
+				"tag": "@link",
+				"text": "micromark-extension-kbd-nested"
+			},
+			{
+				"kind": "text",
+				"text": " for syntax and options.\n\n## Use\n\n"
+			},
+			{
+				"kind": "code",
+				"text": "```js\nimport { unified } from \"unified\";\nimport remarkParse from \"remark-parse\";\nimport { remarkKbdNested } from \"remark-kbd-nested\";\nimport remarkRehype from \"remark-rehype\";\nimport rehypeStringify from \"rehype-stringify\";\n\nmain();\n\nasync function main() {\n  const file = await unified()\n    .use(remarkParse)\n    .use(remarkKbdNested)\n    .use(remarkRehype)\n    .use(rehypeStringify)\n    .process(\"Press ||| ||Ctrl|| + ||//key//|| ||| to trigger the action.\");\n\n  console.log(String(file));\n}\n```"
+			},
+			{
+				"kind": "text",
+				"text": "\n\nYields:\n\n"
+			},
+			{
+				"kind": "code",
+				"text": "```html\n<p>Press <kbd><kbd>Ctrl</kbd></kbd> + <kbd><var>key</var></kbd></kbd> to trigger the action.</p>\n```"
+			}
+		]
+	},
+	"children": [
+		{
+			"id": 5,
+			"name": "IOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Options that can be passed to the extension."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 6,
+					"name": "delimiter",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Character code or character to use as a delimiter for keyboard sequences. Defaults to "
+							},
+							{
+								"kind": "code",
+								"text": "`|`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "packages/micromark-extension-kbd-nested/src/index.ts",
+							"line": 65,
+							"character": 2,
+							"url": "https://github.com/shivjm/remark-extensions/blob/42369f16052bbb552ef06b9c2e41cbb4be04d6dd/packages/micromark-extension-kbd-nested/src/index.ts#L65"
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				},
+				{
+					"id": 7,
+					"name": "variableDelimiter",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Character code or character to use as a delimiter for variable sequences within keyboard sequences. Defaults to "
+							},
+							{
+								"kind": "code",
+								"text": "`/`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "packages/micromark-extension-kbd-nested/src/index.ts",
+							"line": 68,
+							"character": 2,
+							"url": "https://github.com/shivjm/remark-extensions/blob/42369f16052bbb552ef06b9c2e41cbb4be04d6dd/packages/micromark-extension-kbd-nested/src/index.ts#L68"
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						6,
+						7
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "packages/micromark-extension-kbd-nested/src/index.ts",
+					"line": 63,
+					"character": 17,
+					"url": "https://github.com/shivjm/remark-extensions/blob/42369f16052bbb552ef06b9c2e41cbb4be04d6dd/packages/micromark-extension-kbd-nested/src/index.ts#L63"
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "remarkKbdNested",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "packages/remark-kbd-nested/src/index.ts",
+					"line": 90,
+					"character": 13,
+					"url": "https://github.com/shivjm/remark-extensions/blob/42369f16052bbb552ef06b9c2e41cbb4be04d6dd/packages/remark-kbd-nested/src/index.ts#L90"
+				}
+			],
+			"signatures": [
+				{
+					"id": 2,
+					"name": "remarkKbdNested",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "remark plugin to convert keyboard and variable sequences into\n[rehype](https://github.com/rehypejs/rehype/)-compatible "
+							},
+							{
+								"kind": "code",
+								"text": "`<kbd>`"
+							},
+							{
+								"kind": "text",
+								"text": "\nand "
+							},
+							{
+								"kind": "code",
+								"text": "`<var>`"
+							},
+							{
+								"kind": "text",
+								"text": " elements respectively. See "
+							},
+							{
+								"kind": "inline-tag",
+								"tag": "@link",
+								"text": "micromark-extension-kbd-nested"
+							},
+							{
+								"kind": "text",
+								"text": " for syntax and options."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "packages/remark-kbd-nested/src/index.ts",
+							"line": 90,
+							"character": 13,
+							"url": "https://github.com/shivjm/remark-extensions/blob/42369f16052bbb552ef06b9c2e41cbb4be04d6dd/packages/remark-kbd-nested/src/index.ts#L90"
+						}
+					],
+					"parameters": [
+						{
+							"id": 3,
+							"name": "this",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "../../node_modules/.pnpm/unified@10.1.2/node_modules/unified/index.d.ts",
+									"qualifiedName": "Processor"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "void"
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "../../node_modules/.pnpm/@types+mdast@3.0.15/node_modules/@types/mdast/index.d.ts",
+											"qualifiedName": "Root"
+										},
+										"name": "Root",
+										"package": "@types/mdast"
+									},
+									{
+										"type": "intrinsic",
+										"name": "void"
+									},
+									{
+										"type": "intrinsic",
+										"name": "void"
+									}
+								],
+								"name": "Processor",
+								"package": "unified"
+							}
+						},
+						{
+							"id": 4,
+							"name": "settings",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {
+								"isRest": true
+							},
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"target": 5,
+									"name": "IOptions",
+									"package": "micromark-extension-kbd-nested"
+								}
+							}
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "void"
+							},
+							{
+								"type": "reference",
+								"target": {
+									"sourceFileName": "../../node_modules/.pnpm/unified@10.1.2/node_modules/unified/index.d.ts",
+									"qualifiedName": "Transformer"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "../../node_modules/.pnpm/@types+mdast@3.0.15/node_modules/@types/mdast/index.d.ts",
+											"qualifiedName": "Root"
+										},
+										"name": "Root",
+										"package": "@types/mdast"
+									},
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "../../node_modules/.pnpm/@types+mdast@3.0.15/node_modules/@types/mdast/index.d.ts",
+											"qualifiedName": "Root"
+										},
+										"name": "Root",
+										"package": "@types/mdast"
+									}
+								],
+								"name": "Transformer",
+								"package": "unified"
+							}
+						]
+					}
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Interfaces",
+			"children": [
+				5
+			]
+		},
+		{
+			"title": "Functions",
+			"children": [
+				1
+			]
+		}
+	],
+	"packageName": "remark-kbd-nested",
+	"packageVersion": "0.6.1",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# remark-kbd-nested\n\n[![Build][test-badge]][build]\n[![Downloads][downloads-badge]][downloads]\n[![Size][size-badge]][size]\n\n**[remark][]** extension to support "
+		},
+		{
+			"kind": "code",
+			"text": "`kbd`"
+		},
+		{
+			"kind": "text",
+			"text": " element syntax with\nconfigurable delimiters, escaping, "
+		},
+		{
+			"kind": "code",
+			"text": "`var`"
+		},
+		{
+			"kind": "text",
+			"text": " sequences, and arbitrary\nnesting (e.g. <kbd><kbd>Ctrl</kbd> + <kbd><var>key</var></kbd></kbd>).\n\n[Docs at shivjm.github.io/remark-extensions.](https://shivjm.github.io/remark-extensions/modules/remark_kbd_nested.html)\n\n## Install\n\nThis package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):\nNode 18+ is needed to use it and it must be "
+		},
+		{
+			"kind": "code",
+			"text": "`import`"
+		},
+		{
+			"kind": "text",
+			"text": "ed instead of "
+		},
+		{
+			"kind": "code",
+			"text": "`require`"
+		},
+		{
+			"kind": "text",
+			"text": "d.\n\n[npm][]:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```sh\nnpm install micromark-extension-kbd-nested\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Use\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```javascript\nimport { remark } from \"remark\";\nimport { remarkKbdNested } from \"remark-kbd-nested\";\nimport remarkRehype from \"remark-rehype\";\nimport rehypeStringify from \"rehype-stringify\";\n\nconst output = remark()\n      .use(remarkKbdNested)\n      .use(remarkRehype)\n      .use(rehypeStringify)\n      .processSync(\"Press ||| ||Ctrl|| + || \\| || |||, then || //key// ||.\");\n\nconsole.log(String(output));\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nYields:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```html\n<p>Press <kbd><kbd>Ctrl</kbd> + <kbd>|</kbd></kbd>, then <kbd><var>key</var></kbd>.</p>\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Syntax\n\nSee [micromark-extension-kbd-nested][].\n\n## API\n\n### "
+		},
+		{
+			"kind": "code",
+			"text": "`remarkKbdNested(options?)`"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nReturns a remark plugin to parse keyboard sequences optionally\ncontaining variable sequences (can be passed to "
+		},
+		{
+			"kind": "code",
+			"text": "`use`"
+		},
+		{
+			"kind": "text",
+			"text": "). The options\nare passed directly to [micromark-extension-kbd-nested][].\n\n## License\n\n[ISC][LICENSE] © [Shiv Jha Mathur][author]\n\n[test-badge]: https://github.com/shivjm/remark-extensions/actions/workflows/test.yml/badge.svg\n\n[build]: https://github.com/shivjm/remark-extensions/actions\n\n[downloads-badge]: https://img.shields.io/npm/dm/remark-kbd-nested.svg\n\n[downloads]: https://www.npmjs.com/package/remark-kbd-nested\n\n[size-badge]: https://img.shields.io/bundlephobia/minzip/remark-kbd-nested.svg\n\n[size]: https://bundlephobia.com/result?p=remark-kbd-nested\n\n[remark]: https://github.com/remarkjs/remark\n\n[npm]: https://docs.npmjs.com/cli/install\n\n[micromark-extension-kbd-nested]: https://www.npmjs.com/package/micromark-extension-kbd-nested\n\n[license]: ../../license\n\n[author]: https://github.com/shivjm/"
+		}
+	],
+	"symbolIdMap": {
+		"0": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "remarkKbdNested"
+		},
+		"2": {
+			"sourceFileName": "../../node_modules/.pnpm/unified@10.1.2/node_modules/unified/index.d.ts",
+			"qualifiedName": "remarkKbdNested"
+		},
+		"3": {
+			"sourceFileName": "../../node_modules/.pnpm/unified@10.1.2/node_modules/unified/index.d.ts",
+			"qualifiedName": "this"
+		},
+		"4": {
+			"sourceFileName": "../../node_modules/.pnpm/unified@10.1.2/node_modules/unified/index.d.ts",
+			"qualifiedName": "settings"
+		},
+		"5": {
+			"sourceFileName": "../micromark-extension-kbd-nested/src/index.ts",
+			"qualifiedName": "IOptions"
+		},
+		"6": {
+			"sourceFileName": "../micromark-extension-kbd-nested/src/index.ts",
+			"qualifiedName": "IOptions.delimiter"
+		},
+		"7": {
+			"sourceFileName": "../micromark-extension-kbd-nested/src/index.ts",
+			"qualifiedName": "IOptions.variableDelimiter"
+		}
+	}
+}

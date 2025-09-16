@@ -1,0 +1,878 @@
+{
+	"id": 0,
+	"name": "hast-split-pre-lines",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"children": [
+		{
+			"id": 14,
+			"name": "Options",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Configurable behaviour."
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 8,
+					"character": 12,
+					"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L8"
+				}
+			],
+			"type": {
+				"type": "reflection",
+				"declaration": {
+					"id": 15,
+					"name": "__type",
+					"variant": "declaration",
+					"kind": 65536,
+					"flags": {},
+					"children": [
+						{
+							"id": 18,
+							"name": "debug",
+							"variant": "declaration",
+							"kind": 1024,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "A logging function like the one from the debug module."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "index.ts",
+									"line": 16,
+									"character": 2,
+									"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L16"
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "../../node_modules/.pnpm/@types+debug@4.1.12/node_modules/@types/debug/index.d.ts",
+											"qualifiedName": "debug.Debugger"
+										},
+										"name": "Debugger",
+										"package": "@types/debug",
+										"qualifiedName": "debug.Debugger"
+									},
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									}
+								]
+							}
+						},
+						{
+							"id": 17,
+							"name": "elementsToSplit",
+							"variant": "declaration",
+							"kind": 1024,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Search for an element from this list under the "
+									},
+									{
+										"kind": "code",
+										"text": "`pre`"
+									},
+									{
+										"kind": "text",
+										"text": "."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "index.ts",
+									"line": 13,
+									"character": 2,
+									"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L13"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "../../node_modules/.pnpm/typescript@5.9.2/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Readonly"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "../../node_modules/.pnpm/typescript@5.9.2/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+											"qualifiedName": "Set"
+										},
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											}
+										],
+										"name": "Set",
+										"package": "typescript"
+									}
+								],
+								"name": "Readonly",
+								"package": "typescript"
+							}
+						},
+						{
+							"id": 16,
+							"name": "lineClass",
+							"variant": "declaration",
+							"kind": 1024,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "The class to apply to each line’s "
+									},
+									{
+										"kind": "code",
+										"text": "`span`"
+									},
+									{
+										"kind": "text",
+										"text": ". "
+									},
+									{
+										"kind": "code",
+										"text": "`-content`"
+									},
+									{
+										"kind": "text",
+										"text": " will be appended for the contents."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "index.ts",
+									"line": 10,
+									"character": 2,
+									"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L10"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"children": [
+								18,
+								17,
+								16
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 8,
+							"character": 22,
+							"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L8"
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 5,
+			"name": "getUnclosedTags",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 100,
+					"character": 16,
+					"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L100"
+				}
+			],
+			"signatures": [
+				{
+					"id": 6,
+					"name": "getUnclosedTags",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Get a list of all tags not closed in the given HTML string."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 100,
+							"character": 16,
+							"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L100"
+						}
+					],
+					"parameters": [
+						{
+							"id": 7,
+							"name": "line",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "typeOperator",
+						"operator": "readonly",
+						"target": {
+							"type": "array",
+							"elementType": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								]
+							}
+						}
+					}
+				}
+			]
+		},
+		{
+			"id": 8,
+			"name": "makeLine",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 143,
+					"character": 16,
+					"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L143"
+				}
+			],
+			"signatures": [
+				{
+					"id": 9,
+					"name": "makeLine",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Create a wrapper element for "
+							},
+							{
+								"kind": "code",
+								"text": "`line`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 143,
+							"character": 16,
+							"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L143"
+						}
+					],
+					"parameters": [
+						{
+							"id": 10,
+							"name": "line",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "../../node_modules/.pnpm/@types+hast@3.0.4/node_modules/@types/hast/index.d.ts",
+									"qualifiedName": "Element"
+								},
+								"name": "Element",
+								"package": "@types/hast"
+							}
+						},
+						{
+							"id": 11,
+							"name": "index",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 12,
+							"name": "lineClass",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 13,
+							"name": "addNewline",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../node_modules/.pnpm/@types+hast@3.0.4/node_modules/@types/hast/index.d.ts",
+							"qualifiedName": "Element"
+						},
+						"name": "Element",
+						"package": "@types/hast"
+					}
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "splitLines",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 44,
+					"character": 16,
+					"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L44"
+				}
+			],
+			"signatures": [
+				{
+					"id": 2,
+					"name": "splitLines",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Split the contents of the first allowed element in "
+							},
+							{
+								"kind": "code",
+								"text": "`pre`"
+							},
+							{
+								"kind": "text",
+								"text": " into one\n"
+							},
+							{
+								"kind": "code",
+								"text": "`span`"
+							},
+							{
+								"kind": "text",
+								"text": " per line (denoted source by "
+							},
+							{
+								"kind": "code",
+								"text": "`\\n`"
+							},
+							{
+								"kind": "text",
+								"text": "). Each individual line is\nwrapped using ["
+							},
+							{
+								"kind": "code",
+								"text": "`makeLine`"
+							},
+							{
+								"kind": "text",
+								"text": "], which also nests another "
+							},
+							{
+								"kind": "code",
+								"text": "`-content`"
+							},
+							{
+								"kind": "text",
+								"text": "\n"
+							},
+							{
+								"kind": "code",
+								"text": "`span`"
+							},
+							{
+								"kind": "text",
+								"text": " inside the main "
+							},
+							{
+								"kind": "code",
+								"text": "`span`"
+							},
+							{
+								"kind": "text",
+								"text": ". The line number is stored in the\n"
+							},
+							{
+								"kind": "code",
+								"text": "`data-line`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute of the outer "
+							},
+							{
+								"kind": "code",
+								"text": "`span`"
+							},
+							{
+								"kind": "text",
+								"text": ". The containing element\ngains a "
+							},
+							{
+								"kind": "code",
+								"text": "`data-digits`"
+							},
+							{
+								"kind": "text",
+								"text": " attribute. "
+							},
+							{
+								"kind": "code",
+								"text": "`options`"
+							},
+							{
+								"kind": "text",
+								"text": " will be shallowly merged\nwith "
+							},
+							{
+								"kind": "code",
+								"text": "`DEFAULT_OPTIONS`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 44,
+							"character": 16,
+							"url": "https://github.com/shivjm/remark-extensions/blob/0ca26ffd1aee538f332faebe1c7f77b20fa24be4/packages/hast-split-pre-lines/src/index.ts#L44"
+						}
+					],
+					"parameters": [
+						{
+							"id": 3,
+							"name": "pre",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "../../node_modules/.pnpm/@types+hast@3.0.4/node_modules/@types/hast/index.d.ts",
+									"qualifiedName": "Element"
+								},
+								"name": "Element",
+								"package": "@types/hast"
+							}
+						},
+						{
+							"id": 4,
+							"name": "options",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "../../node_modules/.pnpm/typescript@5.9.2/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Partial"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Options",
+										"package": "hast-split-pre-lines"
+									}
+								],
+								"name": "Partial",
+								"package": "typescript"
+							},
+							"defaultValue": "{}"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "void"
+					}
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Type Aliases",
+			"children": [
+				14
+			]
+		},
+		{
+			"title": "Functions",
+			"children": [
+				5,
+				8,
+				1
+			]
+		}
+	],
+	"packageName": "hast-split-pre-lines",
+	"packageVersion": "1.0.4",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# hast-split-pre-lines\n\n[![Build][test-badge]][build]\n[![Downloads][downloads-badge]][downloads]\n[![Size][size-badge]][size]\n\n**[hast][]** utility to split newline-delimited "
+		},
+		{
+			"kind": "code",
+			"text": "`pre`"
+		},
+		{
+			"kind": "text",
+			"text": " text (inside specific elements) into one "
+		},
+		{
+			"kind": "code",
+			"text": "`span`"
+		},
+		{
+			"kind": "text",
+			"text": " per line while maintaining integrity of tags.\n\n[Docs at shivjm.github.io/remark-extensions.](https://shivjm.github.io/remark-extensions/modules/hast_split_pre_lines.html)\n\n## Install\n\nThis package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):\nNode 18+ is needed to use it and it must be "
+		},
+		{
+			"kind": "code",
+			"text": "`import`"
+		},
+		{
+			"kind": "text",
+			"text": "ed instead of "
+		},
+		{
+			"kind": "code",
+			"text": "`require`"
+		},
+		{
+			"kind": "text",
+			"text": "d.\n\n[npm][]:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```sh\nnpm install hast-split-pre-lines\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Use\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```javascript\nimport debug from \"debug\";\nimport * as select from \"hast-util-select\";\nimport { splitLines } from \"hast-split-pre-lines\";\n\nconst processPresDebug = debug(\"ProcessPres\");\n\nexport function processPres(tree) {\n    const pres = select.selectAll(\"pre\", tree);\n\n    for (const pre of pres) {\n      splitLines(pre, { debug: processPresDebug });\n    }\n}\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nAn element like this:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```html\n<pre><code class=\"language-javascript\"><span class=\"token keyword\">const</span> <span class=\"token constant\">DEFAULT_LINE_CLASS</span> <span class=\"token operator\">=</span> <span class=\"token string\">\"line\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> <span class=\"token constant\">DEFAULT_OPTIONS</span><span class=\"token operator\">:</span> Readonly<span class=\"token operator\">&lt;</span>Options<span class=\"token operator\">&gt;</span> <span class=\"token operator\">=</span> Object<span class=\"token punctuation\">.</span><span class=\"token function\">freeze</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>\n  <span class=\"token literal-property property\">lineClass</span><span class=\"token operator\">:</span> <span class=\"token constant\">DEFAULT_LINE_CLASS</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">elementsToSplit</span><span class=\"token operator\">:</span> <span class=\"token constant\">DEFAULT_ELEMENTS_TO_SPLIT</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">debug</span><span class=\"token operator\">:</span> <span class=\"token keyword\">undefined</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> <span class=\"token constant\">NEWLINE_RE</span> <span class=\"token operator\">=</span> <span class=\"token regex\"><span class=\"token regex-delimiter\">/</span><span class=\"token regex-source language-regex\">\\n</span><span class=\"token regex-delimiter\">/</span></span><span class=\"token punctuation\">;</span>\n</code></pre>\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nBecomes:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```html\n<pre class=\"language-javascript\"><code class=\"language-javascript\" data-digits=\"1\"><span class=\"line\" data-line=\"1\"><span class=\"line-content\"><span class=\"token keyword\">const</span> <span class=\"token constant\">DEFAULT_LINE_CLASS</span> <span class=\"token operator\">=</span> <span class=\"token string\">\"line\"</span><span class=\"token punctuation\">;</span>\n    </span></span><span class=\"line\" data-line=\"2\"><span class=\"line-content\">\n    </span></span><span class=\"line\" data-line=\"3\"><span class=\"line-content\"><span class=\"token keyword\">const</span> <span class=\"token constant\">DEFAULT_OPTIONS</span><span class=\"token operator\">:</span> <span class=\"token maybe-class-name\">Readonly</span><span class=\"token operator\">&#x3C;</span><span class=\"token maybe-class-name\">Options</span><span class=\"token operator\">></span> <span class=\"token operator\">=</span> <span class=\"token known-class-name class-name\">Object</span><span class=\"token punctuation\">.</span><span class=\"token method function property-access\">freeze</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>\n    </span></span><span class=\"line\" data-line=\"4\"><span class=\"line-content\">  <span class=\"token literal-property property\">lineClass</span><span class=\"token operator\">:</span> <span class=\"token constant\">DEFAULT_LINE_CLASS</span><span class=\"token punctuation\">,</span>\n    </span></span><span class=\"line\" data-line=\"5\"><span class=\"line-content\">  <span class=\"token literal-property property\">elementsToSplit</span><span class=\"token operator\">:</span> <span class=\"token constant\">DEFAULT_ELEMENTS_TO_SPLIT</span><span class=\"token punctuation\">,</span>\n    </span></span><span class=\"line\" data-line=\"6\"><span class=\"line-content\">  <span class=\"token literal-property property\">debug</span><span class=\"token operator\">:</span> <span class=\"token keyword nil\">undefined</span><span class=\"token punctuation\">,</span>\n    </span></span><span class=\"line\" data-line=\"7\"><span class=\"line-content\"><span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    </span></span><span class=\"line\" data-line=\"8\"><span class=\"line-content\">\n    </span></span><span class=\"line\" data-line=\"9\"><span class=\"line-content\"><span class=\"token keyword\">const</span> <span class=\"token constant\">NEWLINE_RE</span> <span class=\"token operator\">=</span> <span class=\"token regex\"><span class=\"token regex-delimiter\">/</span><span class=\"token regex-source language-regex\">\\n</span><span class=\"token regex-delimiter\">/</span></span><span class=\"token punctuation\">;</span></span></span></code></pre>\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## API\n\n### "
+		},
+		{
+			"kind": "code",
+			"text": "`splitLines(pre, options?)`"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nSplit the contents of the first allowed element in "
+		},
+		{
+			"kind": "code",
+			"text": "`pre`"
+		},
+		{
+			"kind": "text",
+			"text": " into one "
+		},
+		{
+			"kind": "code",
+			"text": "`span`"
+		},
+		{
+			"kind": "text",
+			"text": " element per line (denoted by "
+		},
+		{
+			"kind": "code",
+			"text": "`\\n`"
+		},
+		{
+			"kind": "text",
+			"text": "). Each individual line is wrapped in a "
+		},
+		{
+			"kind": "code",
+			"text": "`span`"
+		},
+		{
+			"kind": "text",
+			"text": " with the specified class, inside which is another span whose class has "
+		},
+		{
+			"kind": "code",
+			"text": "`-content`"
+		},
+		{
+			"kind": "text",
+			"text": " appended to it, and has a "
+		},
+		{
+			"kind": "code",
+			"text": "`data-line`"
+		},
+		{
+			"kind": "text",
+			"text": " attribute. The containing element gains a "
+		},
+		{
+			"kind": "code",
+			"text": "`data-digits`"
+		},
+		{
+			"kind": "text",
+			"text": " attribute. "
+		},
+		{
+			"kind": "code",
+			"text": "`options`"
+		},
+		{
+			"kind": "text",
+			"text": " is shallowly merged with "
+		},
+		{
+			"kind": "code",
+			"text": "`DEFAULT_OPTIONS`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\n#### Options\n\n| Name               | Type                                                          | Default                     |\n|--------------------|---------------------------------------------------------------|-----------------------------|\n| "
+		},
+		{
+			"kind": "code",
+			"text": "`lineClass`"
+		},
+		{
+			"kind": "text",
+			"text": "        | "
+		},
+		{
+			"kind": "code",
+			"text": "`string`"
+		},
+		{
+			"kind": "text",
+			"text": "                                                      | "
+		},
+		{
+			"kind": "code",
+			"text": "`\"line\"`"
+		},
+		{
+			"kind": "text",
+			"text": "                    |\n| "
+		},
+		{
+			"kind": "code",
+			"text": "`elementsToSplit`"
+		},
+		{
+			"kind": "text",
+			"text": "  | "
+		},
+		{
+			"kind": "code",
+			"text": "`Set<string>`"
+		},
+		{
+			"kind": "text",
+			"text": "                                                 | "
+		},
+		{
+			"kind": "code",
+			"text": "`new Set([\"code\", \"samp\"])`"
+		},
+		{
+			"kind": "text",
+			"text": " |\n| "
+		},
+		{
+			"kind": "code",
+			"text": "`debug`"
+		},
+		{
+			"kind": "text",
+			"text": " (optional) | "
+		},
+		{
+			"kind": "code",
+			"text": "`Debugger`"
+		},
+		{
+			"kind": "text",
+			"text": " (see [debug](https://www.npmjs.com/package/debug)) |                             |\n\n## License\n\n[ISC][LICENSE] © [Shiv Jha Mathur][author]\n\n[test-badge]: https://github.com/shivjm/remark-extensions/actions/workflows/test.yml/badge.svg\n\n[build]: https://github.com/shivjm/remark-extensions/actions\n\n[downloads-badge]: https://img.shields.io/npm/dm/hast-split-pre-lines.svg\n\n[downloads]: https://www.npmjs.com/package/hast-split-pre-lines\n\n[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-split-pre-lines.svg\n\n[size]: https://bundlephobia.com/result?p=hast-split-pre-lines\n\n[hast]: https://github.com/syntax-tree/hast\n\n[remark]: https://github.com/remarkjs/remark\n\n[npm]: https://docs.npmjs.com/cli/install\n\n[license]: ../../license\n\n[author]: https://github.com/shivjm/"
+		}
+	],
+	"symbolIdMap": {
+		"0": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "splitLines"
+		},
+		"2": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "splitLines"
+		},
+		"3": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "pre"
+		},
+		"4": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "options"
+		},
+		"5": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "getUnclosedTags"
+		},
+		"6": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "getUnclosedTags"
+		},
+		"7": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "line"
+		},
+		"8": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "makeLine"
+		},
+		"9": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "makeLine"
+		},
+		"10": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "line"
+		},
+		"11": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "index"
+		},
+		"12": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "lineClass"
+		},
+		"13": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "addNewline"
+		},
+		"14": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "Options"
+		},
+		"15": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "__type"
+		},
+		"16": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "__type.lineClass"
+		},
+		"17": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "__type.elementsToSplit"
+		},
+		"18": {
+			"sourceFileName": "src/index.ts",
+			"qualifiedName": "__type.debug"
+		}
+	}
+}

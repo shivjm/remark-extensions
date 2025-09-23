@@ -6,8 +6,10 @@ import type { Directive } from "micromark-extension-directive";
 // import "mdast-util-to-hast";
 
 export type Options = {
-  createDateTime(datetime: string): ElementContent;
+  createDateTime?: CreateDateTimeFn;
 };
+
+export type CreateDateTimeFn = (datetime: string) => ElementContent;
 
 export function editingPlugin(options: Partial<Options>) {
   const { createDateTime } = options;

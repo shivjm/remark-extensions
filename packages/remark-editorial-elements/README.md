@@ -5,7 +5,8 @@
 [![Size][size-badge]][size]
 
 **[remark][]** extension to support `ins` and `del` elements via
-[remark-directive][].
+[remark-directive][]. (Comprehensive documentation will be added
+soon.)
 
 [Docs at shivjm.github.io/remark-extensions.](https://shivjm.github.io/remark-extensions/modules/remark_editorial_elements.html)
 
@@ -38,6 +39,36 @@ Yields:
 
 ```html
 TODO
+```
+
+## Syntax
+
+### `:ins` (inline, insertions)
+
+```markdown
+Perhaps someday there will be changes. :ins[Now there are.]{datetime="2025-09-23T21:53:18+05:30"}
+```
+
+### `:del` (inline, deletions)
+
+```markdown
+We offer :del[the best]{datetime="2025-09-23T21:53:18+05:30"} products.
+```
+
+### `:::ins` (block, insertions)
+
+```markdown
+:::ins{datetime="2025-09-23T21:53:18+05:30"}
+This information is now obsolete.
+:::
+```
+
+### `:::del` (block, deletions)
+
+```markdown
+:::del{datetime="2025-09-23T21:53:18+05:30"}
+It is not yet safe to go outside.
+:::
 ```
 
 ## API

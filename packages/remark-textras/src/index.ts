@@ -5,8 +5,8 @@ import { getFirstAndLastText, addClass } from "./ast";
 // be imported using `import type`.
 // import "mdast-util-to-hast";
 
-export const OPENING_QUOTE = /^(?:‘|“|’|”)/;
-export const CLOSING_QUOTE = /(?:‘|“|’|”)$/;
+const OPENING_QUOTE = /^(?:‘|“|’|”)/;
+const CLOSING_QUOTE = /(?:‘|“|’|”)$/;
 
 export function textrasPlugin() {
   return transformer;

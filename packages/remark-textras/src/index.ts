@@ -1,12 +1,12 @@
 import type { Root, Parent } from "hast";
 import { visit } from "unist-util-visit";
-import { getFirstAndLastText, addClass } from "./ast";
+import { getFirstAndLastText, addClass } from "./ast.js";
 // This is required to augment the AST type, but unfortunately can’t
 // be imported using `import type`.
 // import "mdast-util-to-hast";
 
-export const OPENING_QUOTE = /^(?:‘|“|’|”)/;
-export const CLOSING_QUOTE = /(?:‘|“|’|”)$/;
+const OPENING_QUOTE = /^(?:‘|“|’|”)/;
+const CLOSING_QUOTE = /(?:‘|“|’|”)$/;
 
 export function textrasPlugin() {
   return transformer;

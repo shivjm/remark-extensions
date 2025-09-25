@@ -43,6 +43,18 @@ TODO
 
 ## Syntax
 
+### `:sic` (inline)
+
+```markdown
+> It’s true taht :sic{} they said
+```
+
+### `:ellipsis` (inline)
+
+```markdown
+> We were told it’s very :ellipsis{} good for the soul
+```
+
 ### `:ins` (inline, insertions)
 
 ```markdown

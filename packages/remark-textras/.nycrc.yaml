@@ -1,0 +1,4 @@
+# coverage is currently non-functional, see <https://github.com/istanbuljs/nyc/issues/1287>
+reporter: [text, cobertura]
+include:
+  - "src/**"

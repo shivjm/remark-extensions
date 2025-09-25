@@ -1,0 +1,66 @@
+{
+  "name": "remark-textras",
+  "version": "0.0.1",
+  "description": "remark extension to add some useful text helpers via remark-directive",
+  "keywords": [
+    "remark",
+    "remark-plugin",
+    "remark-directive",
+    "markdown"
+  ],
+  "homepage": "https://github.com/shivjm/remark-extensions",
+  "bugs": {
+    "url": "https://github.com/shivjm/remark-extensions/issues"
+  },
+  "license": "ISC",
+  "author": "Shiv Jha-Mathur",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shivjm/remark-extensions.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:clean": "rimraf lib && npm run build",
+    "lint": "eslint src/**/*.ts --config ../../eslint.config.mjs",
+    "test": "node --import tsx --test tests/index.ts",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "@types/hast": "^3.0.4",
+    "@types/node": "^16.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "hast": "^1.0.0",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "tsx": "^4.20.5",
+    "typescript": "^4.4.4",
+    "typescript-eslint": "^8.44.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./lib/index.js",
+        "types": "./lib/index.d.ts"
+      }
+    }
+  },
+  "files": [
+    "lib/"
+  ],
+  "peerDependencies": {
+    "remark-directive": "^4.0.0"
+  }
+}

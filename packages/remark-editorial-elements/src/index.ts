@@ -45,6 +45,37 @@ export function editingPlugin(options: Partial<Options>) {
     visit(tree, { type: "textDirective", name: "ins" }, (node: Directive) => {
       changeName(node, "ins", ["inline"]);
     });
+    visit(tree, { type: "textDirective", name: "sic" }, sicVisitor);
+    visit(tree, { type: "textDirective", name: "ellipsis" }, ellipsisVisitor);
+  }
+
+  function ellipsisVisitor(node: Parent) {
+    node.data = {
+      ...node.data,
+      hName: "ins",
+      hProperties: { class: "editorial" },
+      hChildren: [{ type: "text", value: "[…]" }],
+    };
+  }
+
+  function sicVisitor(node: Parent) {
+    node.data = {
+      ...node.data,
+      hName: "ins",
+      hProperties: { class: "editorial" },
+      hChildren: [
+        {
+          type: "element",
+          tagName: "abbr",
+          hName: "abbr",
+          properties: {
+            class: "sic",
+            title: "Spelling Is Correct",
+          },
+          children: [{ type: "text", value: "[sic]" }],
+        },
+      ],
+    };
   }
 }
 

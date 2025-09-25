@@ -1,6 +1,6 @@
 {
   "name": "remark-textras",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "remark extension to add some useful text helpers via remark-directive",
   "keywords": [
     "remark",

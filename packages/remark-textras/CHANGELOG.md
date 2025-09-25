@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/shivjm/remark-extensions/compare/remark-textras-v0.2.0...remark-textras-v0.3.0) (2025-09-25)
+
+
+### Features
+
+* **remark-textras:** add `:work` ([bf8b24e](https://github.com/shivjm/remark-extensions/commit/bf8b24ee0de4d6c432beffaece6a8b46375859f5))
+
 ## [0.2.0](https://github.com/shivjm/remark-extensions/compare/remark-textras-v0.1.0...remark-textras-v0.2.0) (2025-09-25)
 
 

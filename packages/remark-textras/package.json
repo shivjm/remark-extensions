@@ -27,6 +27,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
+    "hastscript": "^9.0.1",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

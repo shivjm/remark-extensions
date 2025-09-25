@@ -1,6 +1,6 @@
 import type { Root, Parent } from "hast";
 import { visit } from "unist-util-visit";
-import { getFirstAndLastText, addClass } from "./ast";
+import { getFirstAndLastText, addClass } from "./ast.js";
 // This is required to augment the AST type, but unfortunately can’t
 // be imported using `import type`.
 // import "mdast-util-to-hast";

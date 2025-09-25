@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/shivjm/remark-extensions/compare/remark-editorial-elements-v0.1.1...remark-editorial-elements-v1.0.0) (2025-09-25)
+
+
+### Features
+
+* **remark-editorial-elements:** add `:sic` and `:ellipsis` ([bd74033](https://github.com/shivjm/remark-extensions/commit/bd74033a5688968e24097f08b24663aa6ebd4588))
+
 ### [0.1.1](https://github.com/shivjm/remark-extensions/compare/remark-editorial-elements-v0.1.0...remark-editorial-elements-v0.1.1) (2025-09-23)
 
 ## 0.1.0 (2025-09-23)

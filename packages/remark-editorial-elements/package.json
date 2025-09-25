@@ -1,6 +1,6 @@
 {
   "name": "remark-editorial-elements",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "remark extension to add `ins` and `del` directives via remark-directive",
   "keywords": [
     "remark",

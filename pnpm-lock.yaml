@@ -270,6 +270,9 @@ importers:
 
   packages/remark-textras:
     dependencies:
+      hastscript:
+        specifier: ^9.0.1
+        version: 9.0.1
       remark-directive:
         specifier: ^4.0.0
         version: 4.0.0

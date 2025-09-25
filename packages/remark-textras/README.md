@@ -77,6 +77,12 @@ This page is built using :abbr[HTML] and :abbr[CSS].
 At this point, the program should fail with an error like :samp[Invalid fizz provided].
 ```
 
+### `:work`
+
+```markdown
+See the aforementioned :work[A Real Pain] and :work[Futurama]{year="1999"}.
+```
+
 ## API
 
 TODO

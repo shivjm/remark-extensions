@@ -9,11 +9,6 @@
     "test": "pnpm test -r",
     "typedoc": "typedoc --entryPointStrategy packages --options typedoc.json packages/*"
   },
-  "pnpm": {
-    "overrides": {
-      "conventional-changelog-conventionalcommits": "npm:@shivjm/conventional-changelog-conventionalcommits@4.6.1"
-    }
-  },
   "devDependencies": {
     "standard-version": "^9.5.0",
     "typedoc": "^0.25.13"

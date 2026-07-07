@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/shivjm/remark-extensions/compare/remark-textras-v0.4.0...remark-textras-v0.4.1) (2026-07-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* require Node >= 24 in root
+
+### Build System
+
+* require Node >= 24 in root ([b215e47](https://github.com/shivjm/remark-extensions/commit/b215e47f2f2686b197b93a15d3f8c96f521f40ad))
+
 ## [0.4.0](https://github.com/shivjm/remark-extensions/compare/remark-textras-v0.3.0...remark-textras-v0.4.0) (2026-07-07)
 
 

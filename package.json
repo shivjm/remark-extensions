@@ -4,9 +4,6 @@
     "node": ">=24"
   },
   "scripts": {
-    "lint": "pnpm run -r lint",
-    "build": "pnpm build -r --parallel",
-    "test": "pnpm test -r",
     "typedoc": "typedoc --entryPointStrategy packages --options typedoc.json packages/*"
   },
   "devDependencies": {

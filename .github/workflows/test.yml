@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run tests
-        run: pnpm test
+        run: pnpm -r test
 
       # TODO add coverage using
       # <https://github.com/marketplace/actions/code-coverage-summary>

@@ -117,6 +117,7 @@ export function textrasPlugin() {
       var: "var",
       abbr: "abbr",
       samp: "samp",
+      dfn: "dfn",
     })) {
       visit(tree, { type: "textDirective", name }, (node) =>
         changeName(node, element),

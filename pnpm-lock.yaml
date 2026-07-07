@@ -40,8 +40,8 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       '@types/node':
-        specifier: ^18.19.125
-        version: 18.19.125
+        specifier: ^24.13.2
+        version: 24.13.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^4.32.0
         version: 4.33.0(@typescript-eslint/parser@4.33.0(eslint@9.1.1)(typescript@5.9.2))(eslint@9.1.1)(typescript@5.9.2)
@@ -89,8 +89,8 @@ importers:
         specifier: ^9.0.0
         version: 9.1.1
       '@types/node':
-        specifier: ^16.10.1
-        version: 16.18.96
+        specifier: ^24.13.2
+        version: 24.13.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^4.32.0
         version: 4.33.0(@typescript-eslint/parser@4.33.0(eslint@9.1.1)(typescript@4.9.5))(eslint@9.1.1)(typescript@4.9.5)
@@ -129,7 +129,7 @@ importers:
         version: 3.0.2
       ts-node:
         specifier: ^10.2.1
-        version: 10.9.2(@types/node@16.18.96)(typescript@4.9.5)
+        version: 10.9.2(@types/node@24.13.2)(typescript@4.9.5)
       typescript:
         specifier: ^4.4.4
         version: 4.9.5
@@ -153,8 +153,8 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       '@types/node':
-        specifier: ^16.10.1
-        version: 16.18.96
+        specifier: ^24.13.2
+        version: 24.13.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.44.1
         version: 8.44.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0)(typescript@4.9.5))(eslint@9.36.0)(typescript@4.9.5)
@@ -211,8 +211,8 @@ importers:
         specifier: ^9.0.0
         version: 9.1.1
       '@types/node':
-        specifier: ^18.19.31
-        version: 18.19.125
+        specifier: ^24.13.2
+        version: 24.13.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^4.32.0
         version: 4.33.0(@typescript-eslint/parser@4.33.0(eslint@9.1.1)(typescript@4.9.5))(eslint@9.1.1)(typescript@4.9.5)
@@ -257,7 +257,7 @@ importers:
         version: 3.0.2
       ts-node:
         specifier: ^10.2.1
-        version: 10.9.2(@types/node@18.19.125)(typescript@4.9.5)
+        version: 10.9.2(@types/node@24.13.2)(typescript@4.9.5)
       typescript:
         specifier: ^4.4.4
         version: 4.9.5
@@ -287,8 +287,8 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       '@types/node':
-        specifier: ^16.10.1
-        version: 16.18.96
+        specifier: ^24.13.2
+        version: 24.13.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.44.1
         version: 8.44.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0)(typescript@4.9.5))(eslint@9.36.0)(typescript@4.9.5)
@@ -679,11 +679,8 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  '@types/node@16.18.96':
-    resolution: {integrity: sha512-84iSqGXoO+Ha16j8pRZ/L90vDMKX04QTYMTfYeE1WrjWaZXuchBehGUZEpNgx7JnmlrIHdnABmpjrQjhCnNldQ==}
-
-  '@types/node@18.19.125':
-    resolution: {integrity: sha512-4TWNu0IxTQcszliYdW2mxrVvhHeERUeDCUwVuvQFn9JCU02kxrUDs8v52yOazPo7wLHKgqEd2FKxlSN6m8Deqg==}
+  '@types/node@24.13.2':
+    resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2536,8 +2533,8 @@ packages:
     engines: {node: '>=0.8.0'}
     hasBin: true
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
   unified@10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
@@ -2964,11 +2961,9 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
-  '@types/node@16.18.96': {}
-
-  '@types/node@18.19.125':
+  '@types/node@24.13.2':
     dependencies:
-      undici-types: 5.26.5
+      undici-types: 7.18.2
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -5296,32 +5291,14 @@ snapshots:
     dependencies:
       typescript: 4.9.5
 
-  ts-node@10.9.2(@types/node@16.18.96)(typescript@4.9.5):
+  ts-node@10.9.2(@types/node@24.13.2)(typescript@4.9.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 16.18.96
-      acorn: 8.11.3
-      acorn-walk: 8.3.2
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.9.5
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-
-  ts-node@10.9.2(@types/node@18.19.125)(typescript@4.9.5):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 18.19.125
+      '@types/node': 24.13.2
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
@@ -5416,7 +5393,7 @@ snapshots:
   uglify-js@3.17.4:
     optional: true
 
-  undici-types@5.26.5: {}
+  undici-types@7.18.2: {}
 
   unified@10.1.2:
     dependencies:

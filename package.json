@@ -1,7 +1,7 @@
 {
   "name": "remark-extensions",
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   },
   "scripts": {
     "lint": "pnpm run -r lint",

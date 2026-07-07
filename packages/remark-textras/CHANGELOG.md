@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/shivjm/remark-extensions/compare/remark-textras-v0.3.0...remark-textras-v0.4.0) (2026-07-07)
+
+
+### Features
+
+* **remark-textras:** add `dfn` directive ([4bcb6a6](https://github.com/shivjm/remark-extensions/commit/4bcb6a604b4316e3732bf06066a9e17894d604b8))
+
 ## [0.3.0](https://github.com/shivjm/remark-extensions/compare/remark-textras-v0.2.0...remark-textras-v0.3.0) (2025-09-25)
 
 

@@ -1,3 +1,7 @@
 packages:
   - "packages/**"
   - "!**/tests/**"
+allowBuilds:
+  esbuild: true
+overrides:
+  conventional-changelog-conventionalcommits: "npm:@shivjm/conventional-changelog-conventionalcommits@4.6.1"

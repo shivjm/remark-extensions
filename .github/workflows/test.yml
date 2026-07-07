@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  PNPM_VERSION: "9.0.4"
-  NODE_VERSION: "18.20.5"
+  PNPM_VERSION: "11.3.0"
+  NODE_VERSION: "24.15.0"
 
 jobs:
   test:
@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run tests
-        run: pnpm test
+        run: pnpm -r test
 
       # TODO add coverage using
       # <https://github.com/marketplace/actions/code-coverage-summary>
@@ -64,4 +64,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate docs for all packages
-        run: pnpm run -r typedoc
+        run: pnpm run typedoc

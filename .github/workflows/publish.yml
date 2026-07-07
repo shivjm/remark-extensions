@@ -5,8 +5,8 @@ on:
 name: publish-to-npmjs
 
 env:
-  PNPM_VERSION: "9.0.4"
-  NODE_VERSION: "18.20.5"
+  PNPM_VERSION: "11.3.0"
+  NODE_VERSION: "24.15.0"
   TYPEDOC_VERSION: "0.25.13"
 
 jobs:

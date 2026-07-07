@@ -64,4 +64,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate docs for all packages
-        run: pnpm run -r typedoc
+        run: pnpm run typedoc
